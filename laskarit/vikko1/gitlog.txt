@@ -1,0 +1,49 @@
+commit 24295e61c1fcb302d03d0256d5d3e124dcca7756
+Author: John <joni.kokko@omat.fi>
+Date:   Wed Mar 14 12:45:20 2018 +0200
+
+    done
+
+ tiedosto.txt | 1 -
+ toinene.txt  | 0
+ uusi/file22  | 0
+ uusi/file3   | 0
+ 4 files changed, 1 deletion(-)
+
+commit af89ff1af3ed8b65531dc72be1f8a396e0f3ba5b
+Author: John <joni.kokko@omat.fi>
+Date:   Wed Mar 14 12:41:05 2018 +0200
+
+    common
+
+ eka.txt | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+commit 27645a0dcd04c6cc0706d91e29b65ff2b49e2b5c
+Author: John <joni.kokko@omat.fi>
+Date:   Wed Mar 14 12:35:14 2018 +0200
+
+    random stuff
+
+ kolmas.txt       | 1 +
+ stuff/random.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit b0069849e552d5f8bf158dfa334d637f281b7215
+Author: John <joni.kokko@omat.fi>
+Date:   Wed Mar 14 12:29:54 2018 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinene.txt  | 0
+ 2 files changed, 1 insertion(+)
+
+commit ea128b85db51027138cd9edadb05973c53e14df8
+Author: John <joni.kokko@omat.fi>
+Date:   Wed Mar 14 12:26:41 2018 +0200
+
+    tiedosto x luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
