@@ -1,8 +1,8 @@
-$ OTM-harjoitustyö
+# OTM-harjoitustyö
 
-$$ tehtävät
+## tehtävät
 
-$$$ viikko 1
+### viikko 1
 
 [komentorivi.txt](https://github.com/Jhoneagle/otm-harjoitustyo/blob/master/laskarit/vikko1/komentorivi.txt) 
 
