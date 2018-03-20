@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22cd3b75-563b-407f-a049-41f7e660b3b6" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Unicafe.iml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/mycompany/unicafe/Kassapaate.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/mycompany/unicafe/Maksukortti.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/mycompany/unicafe/Paaohjelma.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/com/mycompany/unicafe/MaksukorttiTest.class" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/mycompany/unicafe/MaksukorttiTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/mycompany/unicafe/MaksukorttiTest.java" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,13 +22,12 @@
       <file leaf-file-name="MaksukorttiTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/mycompany/unicafe/MaksukorttiTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state relative-caret-position="204">
+              <caret line="17" column="39" lean-forward="true" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
               <folding>
                 <element signature="e#208#209#0" expanded="true" />
                 <element signature="e#252#253#0" expanded="true" />
                 <element signature="e#303#304#0" expanded="true" />
-                <element signature="e#349#350#0" expanded="true" />
                 <element signature="e#392#393#0" expanded="true" />
                 <element signature="e#443#444#0" expanded="true" />
               </folding>
@@ -63,6 +49,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/test/java/com/mycompany/unicafe/MaksukorttiTest.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -359,7 +346,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1521559700880</updated>
-      <workItem from="1521559704841" duration="5791000" />
+      <workItem from="1521559704841" duration="6234000" />
     </task>
     <servers />
   </component>
@@ -396,7 +383,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5791000" />
+    <option name="totallyTimeSpent" value="6234000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -459,15 +446,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/mycompany/unicafe/MaksukorttiTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state relative-caret-position="204">
+          <caret line="17" column="39" lean-forward="true" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
           <folding>
             <element signature="e#208#209#0" expanded="true" />
             <element signature="e#252#253#0" expanded="true" />
             <element signature="e#303#304#0" expanded="true" />
-            <element signature="e#349#350#0" expanded="true" />
             <element signature="e#392#393#0" expanded="true" />
             <element signature="e#443#444#0" expanded="true" />
           </folding>
