@@ -4,7 +4,8 @@ import database.Database;
 import domain.Tuote;
 
 import java.sql.*;
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class TuoteDao implements Dao<Tuote, Integer> {
 

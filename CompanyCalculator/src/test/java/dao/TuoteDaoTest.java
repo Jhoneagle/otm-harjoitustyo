@@ -2,10 +2,11 @@ package dao;
 
 import database.Database;
 import domain.Tuote;
-import org.junit.*;
-import java.util.*;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
