@@ -35,12 +35,30 @@ public class TuoteDao implements Dao<Tuote, Integer> {
         return tuotteet;
     }
 
+    public Tuote update(Tuote paivitys) throws SQLException {
+        Tuote onko = findByTuotekoodi(paivitys.getTuotekoodi());
+        if (onko != null) {
+            return null;
+        }
+
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("UPDATE tuote SET tuotekoodi = ?, nimi = ?, hinta = ?, alv = ? WHERE id = ?");
+            stmt.setString(1, paivitys.getTuotekoodi());
+            stmt.setString(2, paivitys.getNimi());
+            stmt.setDouble(3, paivitys.getHinta());
+            stmt.setDouble(4, paivitys.getAlv());
+            stmt.setInt(5, paivitys.getId());
+            stmt.executeUpdate();
+        }
+
+        return paivitys;
+    }
+
     @Override
     public Tuote saveOrUpdate(Tuote uusi) throws SQLException {
-        Tuote on = findByTuotekoodi(uusi.getTuotekoodi());
-
-        if (on != null) {
-            return on;
+        Tuote onko = findByTuotekoodi(uusi.getTuotekoodi());
+        if (onko != null) {
+            return null;
         }
 
         try (Connection conn = database.getConnection()) {
