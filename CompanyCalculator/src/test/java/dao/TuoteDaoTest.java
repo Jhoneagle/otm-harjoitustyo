@@ -2,31 +2,48 @@ package dao;
 
 import database.Database;
 import domain.Tuote;
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Properties;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class TuoteDaoTest {
 
     private TuoteDao dao;
-    private int testiKey;
+    private File tempFile;
+
+    @Rule
+    public TemporaryFolder tempFolder = new TemporaryFolder();
 
     @Before
     public void setUp() throws Exception {
-        Database database = new Database("jdbc:sqlite:data.db");
+        Properties properties = new Properties();
+
+        properties.load(new FileInputStream("config.properties"));
+        tempFile = tempFolder.newFile(properties.getProperty("testDatabaseFile"));
+        String databaseAddress = "jdbc:sqlite:"+tempFile.getAbsolutePath();
+
+        Database database = new Database(databaseAddress);
+
+        database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS tuote(id INTEGER PRIMARY KEY, tuotekoodi varchar(255), nimi varchar(255), " +
+                "hinta REAL, alv REAL)").execute();
+
         dao = new TuoteDao(database);
-        this.testiKey = 1;
     }
 
     @Test
-    public void saveOrUpdate() throws SQLException {
-        Tuote testi = new Tuote(1, "testi12345", "testisyote", 1, 1);
-        Tuote mika = dao.saveOrUpdate(testi);
-        this.testiKey = mika.getId();
+    public void save() throws SQLException {
+        Tuote testi = new Tuote(0, "testi12345", "testisyote", 1, 1);
+        Tuote mika = dao.save(testi);
         assertTrue(mika.getTuotekoodi().equals(testi.getTuotekoodi()));
         assertTrue(mika.getNimi().equals(testi.getNimi()));
         assertTrue(mika.getHinta() == testi.getHinta());
@@ -35,7 +52,9 @@ public class TuoteDaoTest {
 
     @Test
     public void findOne() throws SQLException {
-        Tuote mika = dao.findOne(this.testiKey);
+        Tuote testi = new Tuote(0, "testi12345", "testisyote", 1, 1);
+        dao.save(testi);
+        Tuote mika = dao.findOne(1);
         assertTrue(mika.getTuotekoodi().equals("testi12345"));
         assertTrue(mika.getNimi().equals("testisyote"));
         assertTrue(mika.getHinta() == 1);
@@ -43,15 +62,30 @@ public class TuoteDaoTest {
     }
 
     @Test
+    public void update() throws SQLException {
+        Tuote testi = new Tuote(1, "muutos", "muutos", 1, 1);
+        Tuote mika = dao.update(testi);
+        assertTrue(mika.getTuotekoodi().equals(testi.getTuotekoodi()));
+        assertTrue(mika.getNimi().equals(testi.getNimi()));
+        assertTrue(mika.getHinta() == testi.getHinta());
+        assertTrue(mika.getAlv() == testi.getAlv());
+    }
+
+    @Test
     public void delete() throws SQLException {
-        dao.delete(this.testiKey);
+        dao.delete(1);
         List<Tuote> lista = dao.findAll();
         for (int i = 0; i < lista.size(); i++) {
             Tuote temp = lista.get(i);
-            assertTrue(temp.getTuotekoodi().equals("testi12345"));
-            assertTrue(temp.getNimi().equals("testisyote"));
+            assertTrue(temp.getTuotekoodi().equals("muutos"));
+            assertTrue(temp.getNimi().equals("muutos"));
             assertTrue(temp.getHinta() == 1);
             assertTrue(temp.getAlv() == 1);
         }
+    }
+
+    @After
+    public void restore() {
+        tempFile.delete();
     }
 }

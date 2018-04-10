@@ -3,9 +3,12 @@ package dao;
 import database.Database;
 import domain.Tuote;
 
-import java.sql.*;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TuoteDao implements Dao<Tuote, Integer> {
 
@@ -17,15 +20,25 @@ public class TuoteDao implements Dao<Tuote, Integer> {
 
     @Override
     public Tuote findOne(Integer key) throws SQLException {
-        return findAll().stream().filter(t -> t.getId() == key).findFirst().get();
+        List<Tuote> kaikki = findAll();
+
+        for (int i = 0; i < kaikki.size(); i++) {
+            Tuote temp = kaikki.get(i);
+
+            if (temp.getId() == key) {
+                return temp;
+            }
+        }
+
+        return null;
     }
 
     @Override
     public List<Tuote> findAll() throws SQLException {
         List<Tuote> tuotteet = new ArrayList<>();
 
-        try (Connection conn = database.getConnection();
-             ResultSet result = conn.prepareStatement("SELECT * FROM tuote").executeQuery()) {
+        try ( Connection conn = database.getConnection() ) {
+            ResultSet result = conn.prepareStatement("SELECT * FROM tuote").executeQuery();
 
             while (result.next()) {
                 tuotteet.add(new Tuote(result.getInt("id"), result.getString("tuotekoodi"), result.getString("nimi"), result.getDouble("hinta"), result.getDouble("alv")));
@@ -35,6 +48,7 @@ public class TuoteDao implements Dao<Tuote, Integer> {
         return tuotteet;
     }
 
+    @Override
     public Tuote update(Tuote paivitys) throws SQLException {
         Tuote onko = findByTuotekoodi(paivitys.getTuotekoodi());
         if (onko != null) {
@@ -55,7 +69,7 @@ public class TuoteDao implements Dao<Tuote, Integer> {
     }
 
     @Override
-    public Tuote saveOrUpdate(Tuote uusi) throws SQLException {
+    public Tuote save(Tuote uusi) throws SQLException {
         Tuote onko = findByTuotekoodi(uusi.getTuotekoodi());
         if (onko != null) {
             return null;
