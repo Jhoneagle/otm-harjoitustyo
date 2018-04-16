@@ -97,7 +97,7 @@ public class TuoteDao implements Dao<Tuote, Integer> {
         }
     }
 
-    private Tuote findByTuotekoodi(String tuotekoodi) throws SQLException {
+    public Tuote findByTuotekoodi(String tuotekoodi) throws SQLException {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tuote WHERE tuotekoodi = ?");
             stmt.setString(1, tuotekoodi);
