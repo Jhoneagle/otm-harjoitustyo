@@ -1,13 +1,11 @@
 package domain;
 
-import java.util.Date;
-
 public class Paiva {
     private int id;
-    private Date paiva;
+    private String paiva;
     private int asiakas_id;
 
-    public Paiva(int id, Date paiva, int asiakas_id) {
+    public Paiva(int id, String paiva, int asiakas_id) {
         this.id = id;
         this.paiva = paiva;
         this.asiakas_id = asiakas_id;
@@ -17,11 +15,11 @@ public class Paiva {
         return id;
     }
 
-    public Date getPaiva() {
+    public String getPaiva() {
         return paiva;
     }
 
-    public void setPaiva(Date paiva) {
+    public void setPaiva(String paiva) {
         this.paiva = paiva;
     }
 

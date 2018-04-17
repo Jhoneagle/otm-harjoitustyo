@@ -37,7 +37,7 @@ public class PaivaDao implements Dao<Paiva, Integer> {
             ResultSet result = conn.prepareStatement("SELECT * FROM paiva").executeQuery();
 
             while (result.next()) {
-                paivat.add(new Paiva(result.getInt("id"), result.getDate("paiva"), result.getInt("asiakas_id")));
+                paivat.add(new Paiva(result.getInt("id"), result.getString("paiva"), result.getInt("asiakas_id")));
             }
         }
 
@@ -48,7 +48,7 @@ public class PaivaDao implements Dao<Paiva, Integer> {
     public Paiva save(Paiva uusi) throws SQLException {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO paiva(paiva, asiakas_id) VALUES(?, ?)");
-            stmt.setDate(1, (Date) uusi.getPaiva());
+            stmt.setString(1, uusi.getPaiva());
             stmt.setInt(2, uusi.getAsiakas_id());
             stmt.executeUpdate();
         }

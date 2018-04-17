@@ -41,7 +41,7 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
             ResultSet result = conn.prepareStatement("SELECT * FROM asiakas").executeQuery();
 
             while (result.next()) {
-                asiakaat.add(new Asiakas(result.getInt("id"), result.getString("yritys_nimi"), result.getString("y-tunnus"),
+                asiakaat.add(new Asiakas(result.getInt("id"), result.getString("yritys_nimi"), result.getString("ytunnus"),
                         result.getString("nimi"), result.getString("sahkoposti"), result.getString("puhelinnumero"),
                         result.getString("osoite"), result.getString("postinumero"), result.getString("postitoimipaikka")));
             }
@@ -53,7 +53,7 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
     @Override
     public Asiakas save(Asiakas object) throws SQLException {
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO asiakas(yritys_nimi, y-tunnus, nimi, sahkoposti, puhelinnumero, osoite, " +
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO asiakas(yritys_nimi, ytunnus, nimi, sahkoposti, puhelinnumero, osoite, " +
                     "postinumero, postitoimipaikka) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, object.getYritysNimi());
             stmt.setString(2, object.getyTunnus());
@@ -82,7 +82,7 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
 
     public Asiakas findByYtunnus(String yTunnus) throws SQLException {
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM asiakas WHERE y-tunnus = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM asiakas WHERE ytunnus = ?");
             stmt.setString(1, yTunnus);
 
             ResultSet result = stmt.executeQuery();
@@ -90,7 +90,7 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
                 return null;
             }
 
-            return new Asiakas(result.getInt("id"), result.getString("yritys_nimi"), result.getString("y-tunnus"),
+            return new Asiakas(result.getInt("id"), result.getString("yritys_nimi"), result.getString("ytunnus"),
                     result.getString("nimi"), result.getString("sahkoposti"), result.getString("puhelinnumero"),
                     result.getString("osoite"), result.getString("postinumero"), result.getString("postitoimipaikka"));
         }

@@ -2,6 +2,7 @@ package dao;
 
 import database.Database;
 import domain.Asiakas;
+import domain.Paiva;
 import domain.Tilaus;
 import domain.Tuote;
 
@@ -14,9 +15,15 @@ import java.util.List;
 
 public class TilausDao implements Dao<Tilaus, Integer> {
     private Database database;
+    private AsiakasDao asiakasDao;
+    private TuoteDao tuoteDao;
+    private PaivaDao paivaDao;
 
-    public TilausDao(Database database) {
+    public TilausDao(Database database, AsiakasDao asiakasDao, TuoteDao tuoteDao, PaivaDao paivaDao) {
         this.database = database;
+        this.asiakasDao = asiakasDao;
+        this.tuoteDao = tuoteDao;
+        this.paivaDao = paivaDao;
     }
 
     @Override
@@ -36,18 +43,15 @@ public class TilausDao implements Dao<Tilaus, Integer> {
 
     @Override
     public List<Tilaus> findAll() throws SQLException {
-        return null;
-    }
-
-    public List<Tilaus> findAllTilaukset(AsiakasDao asiakasDao, TuoteDao tuoteDao) throws SQLException {
         List<Tilaus> tilaukset = new ArrayList<>();
 
         try ( Connection conn = database.getConnection() ) {
-            ResultSet result = conn.prepareStatement("SELECT * FROM paiva").executeQuery();
+            ResultSet result = conn.prepareStatement("SELECT * FROM tilaus").executeQuery();
 
             while (result.next()) {
                 List<Tuote> tuotteet = new ArrayList<>();
-                Asiakas asiakas = asiakasDao.findOne(result.getInt("asiakas_id"));
+                Paiva paiva = this.paivaDao.findOne(result.getInt("paiva_id"));
+                Asiakas asiakas = asiakasDao.findOne(paiva.getAsiakas_id());
 
                 try ( Connection conn2 = database.getConnection() ) {
                     PreparedStatement stmt = conn2.prepareStatement("SELECT * FROM tilaustuote WHERE tilaus_id = ?");
@@ -67,8 +71,16 @@ public class TilausDao implements Dao<Tilaus, Integer> {
     }
 
     @Override
-    public Tilaus save(Tilaus object) throws SQLException {
-        return null;
+    public Tilaus save(Tilaus uusi) throws SQLException {
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO tilaus(status, paiva_id) VALUES(?, ?)");
+            stmt.setString(1, uusi.getStatus());
+            stmt.setInt(2, uusi.getPaiva_id());
+            stmt.executeUpdate();
+        }
+
+        List<Tilaus> tilaukset = findAll();
+        return tilaukset.get(tilaukset.size() - 1);
     }
 
     @Override
