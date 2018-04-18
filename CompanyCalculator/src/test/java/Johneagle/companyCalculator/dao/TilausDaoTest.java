@@ -1,9 +1,9 @@
 package Johneagle.companyCalculator.dao;
 
-import Johneagle.companyCalculator.Dao.TuoteDao;
-import Johneagle.companyCalculator.Dao.TilausDao;
-import Johneagle.companyCalculator.Dao.PaivaDao;
 import Johneagle.companyCalculator.Dao.AsiakasDao;
+import Johneagle.companyCalculator.Dao.PaivaDao;
+import Johneagle.companyCalculator.Dao.TilausDao;
+import Johneagle.companyCalculator.Dao.TuoteDao;
 import Johneagle.companyCalculator.database.Database;
 import Johneagle.companyCalculator.domain.Asiakas;
 import Johneagle.companyCalculator.domain.Paiva;
@@ -21,7 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TilausDaoTest {
     private TilausDao dao;

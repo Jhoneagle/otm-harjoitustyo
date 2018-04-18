@@ -1,10 +1,10 @@
 package Johneagle.companyCalculator;
 
-import Johneagle.companyCalculator.advancelogic.TilausToiminnallisuus;
 import Johneagle.companyCalculator.Dao.AsiakasDao;
 import Johneagle.companyCalculator.Dao.PaivaDao;
 import Johneagle.companyCalculator.Dao.TilausDao;
 import Johneagle.companyCalculator.Dao.TuoteDao;
+import Johneagle.companyCalculator.advancelogic.TilausToiminnallisuus;
 import Johneagle.companyCalculator.database.Database;
 import Johneagle.companyCalculator.kayttoliittyma.Tekstikayttoliittyma;
 

@@ -1,8 +1,5 @@
 package Johneagle.companyCalculator.Dao;
 
-import Johneagle.companyCalculator.Dao.PaivaDao;
-import Johneagle.companyCalculator.Dao.Dao;
-import Johneagle.companyCalculator.Dao.AsiakasDao;
 import Johneagle.companyCalculator.database.Database;
 import Johneagle.companyCalculator.domain.Asiakas;
 import Johneagle.companyCalculator.domain.Paiva;

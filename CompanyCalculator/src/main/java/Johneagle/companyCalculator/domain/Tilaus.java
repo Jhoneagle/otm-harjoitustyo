@@ -1,7 +1,5 @@
 package Johneagle.companyCalculator.domain;
 
-import Johneagle.companyCalculator.domain.Asiakas;
-import java.util.Date;
 import java.util.List;
 
 public class Tilaus {

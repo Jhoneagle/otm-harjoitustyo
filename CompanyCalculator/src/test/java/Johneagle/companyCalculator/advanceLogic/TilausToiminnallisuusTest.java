@@ -1,10 +1,10 @@
 package Johneagle.companyCalculator.advanceLogic;
 
-import Johneagle.companyCalculator.advancelogic.TilausToiminnallisuus;
 import Johneagle.companyCalculator.Dao.AsiakasDao;
 import Johneagle.companyCalculator.Dao.PaivaDao;
 import Johneagle.companyCalculator.Dao.TilausDao;
 import Johneagle.companyCalculator.Dao.TuoteDao;
+import Johneagle.companyCalculator.advancelogic.TilausToiminnallisuus;
 import Johneagle.companyCalculator.database.Database;
 import Johneagle.companyCalculator.domain.Asiakas;
 import Johneagle.companyCalculator.domain.Tilaus;
@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class TilausToiminnallisuusTest {
@@ -74,8 +73,10 @@ public class TilausToiminnallisuusTest {
         List<String> tuotekoodit = new ArrayList<>();
         String ytunnus = a.getyTunnus();
         String paiva = "21/7/2018";
-        int tuotemaara = 2;
-
+        List<Integer> tuotemaara = new ArrayList<>();
+        tuotemaara.add(2);
+        tuotemaara.add(2);
+        
         Tuote testi = new Tuote(0, "testi12345", "testisyote", 1, 1);
         Tuote testi2 = new Tuote(0, "awq", "testisyote", 2, 2);
 
@@ -103,7 +104,9 @@ public class TilausToiminnallisuusTest {
         List<String> tuotekoodit = new ArrayList<>();
         String ytunnus = a.getyTunnus();
         String paiva = "21/7/2018";
-        int tuotemaara = 2;
+        List<Integer> tuotemaara = new ArrayList<>();
+        tuotemaara.add(2);
+        tuotemaara.add(2);
 
         Tuote testi = new Tuote(0, "testi12345", "testisyote", 1, 1);
         Tuote testi2 = new Tuote(0, "awq", "testisyote", 2, 2);
@@ -126,8 +129,7 @@ public class TilausToiminnallisuusTest {
         List<String> tuotekoodit2 = new ArrayList<>();
         String ytunnus2 = a2.getyTunnus();
         String paiva2 = "21/7/2018";
-        int tuotemaara2 = 2;
-
+        
         Tuote testi1 = new Tuote(0, "www", "testisyote", 1, 1);
         Tuote testi12 = new Tuote(0, "aaa", "testisyote", 2, 2);
 
@@ -139,7 +141,7 @@ public class TilausToiminnallisuusTest {
         tuotekoodit.add(testi1.getTuotekoodi());
         tuotekoodit.add(testi12.getTuotekoodi());
 
-        tilauspalvelu.lisaaTilaus(uusi2, tuotekoodit2, ytunnus2, paiva2, tuotemaara2);
+        tilauspalvelu.lisaaTilaus(uusi2, tuotekoodit2, ytunnus2, paiva2, tuotemaara);
 
         //tarkastus
 

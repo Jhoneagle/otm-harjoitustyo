@@ -31,7 +31,7 @@ public class TilausToiminnallisuus {
         this.tilausDao = tilausDao;
     }
 
-    public void lisaaTilaus(Tilaus uusi, List<String> tuotekoodit, String ytunnus, String paiva, int tuotemaara) throws SQLException {
+    public void lisaaTilaus(Tilaus uusi, List<String> tuotekoodit, String ytunnus, String paiva, List<Integer> tuotemaara) throws SQLException {
         Asiakas asiakas = asiakasDao.findByYtunnus(ytunnus);
         Paiva paivamaara = new Paiva(0, paiva, asiakas.getId());
 
@@ -45,7 +45,7 @@ public class TilausToiminnallisuus {
 
             try (Connection conn = database.getConnection()) {
                 PreparedStatement stmt = conn.prepareStatement("INSERT INTO tilaustuote(tuotemaara, tilaus_id, tuote_id) VALUES(?, ?, ?)");
-                stmt.setInt(1, tuotemaara);
+                stmt.setInt(1, tuotemaara.get(i));
                 stmt.setInt(2, tilausId);
                 stmt.setInt(3, temp.getId());
 

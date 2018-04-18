@@ -1,8 +1,8 @@
 package Johneagle.companyCalculator.kayttoliittyma;
 
-import Johneagle.companyCalculator.advancelogic.TilausToiminnallisuus;
 import Johneagle.companyCalculator.Dao.AsiakasDao;
 import Johneagle.companyCalculator.Dao.TuoteDao;
+import Johneagle.companyCalculator.advancelogic.TilausToiminnallisuus;
 import Johneagle.companyCalculator.domain.Asiakas;
 import Johneagle.companyCalculator.domain.Tilaus;
 import Johneagle.companyCalculator.domain.Tuote;
@@ -163,25 +163,29 @@ public class Tekstikayttoliittyma {
         String status = lukija.nextLine();
         System.out.print("paivamaara: ");
         String paiva = lukija.nextLine();
-        System.out.print("tuotemaara: ");
-        int tuotemaara = Integer.parseInt(lukija.nextLine());
-
+        
+        List<Integer> tuotemaarat = new ArrayList<>();
         List<String> tuotekoodit = new ArrayList<>();
         System.out.print("tuotekoodit (lopettaaksesi paina enter): ");
 
         while (true) {
+            System.out.print("tuotekoodi: ");
             String tuotekoodi = lukija.nextLine();
-
+            
             if (tuotekoodi.isEmpty()) {
                 break;
             } else {
                 tuotekoodit.add(tuotekoodi);
             }
+            
+            System.out.print("tuoteen lukumaara: ");
+            int tuotemaara = Integer.parseInt(lukija.nextLine());
+            tuotemaarat.add(tuotemaara);
         }
 
         Tilaus tilaus = new Tilaus(0, status, new ArrayList<>(), 0, new Asiakas());
         try {
-            tilauspalvelu.lisaaTilaus(tilaus, tuotekoodit, yTunnus, paiva, tuotemaara);
+            tilauspalvelu.lisaaTilaus(tilaus, tuotekoodit, yTunnus, paiva, tuotemaarat);
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,5 @@
 package Johneagle.companyCalculator.Dao;
 
-import Johneagle.companyCalculator.Dao.Dao;
 import Johneagle.companyCalculator.database.Database;
 import Johneagle.companyCalculator.domain.Tuote;
 
