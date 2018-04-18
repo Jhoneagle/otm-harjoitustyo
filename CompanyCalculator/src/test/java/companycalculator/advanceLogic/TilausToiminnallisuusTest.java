@@ -1,14 +1,14 @@
-package Johneagle.companyCalculator.advanceLogic;
+package companycalculator.advanceLogic;
 
-import Johneagle.companyCalculator.Dao.AsiakasDao;
-import Johneagle.companyCalculator.Dao.PaivaDao;
-import Johneagle.companyCalculator.Dao.TilausDao;
-import Johneagle.companyCalculator.Dao.TuoteDao;
-import Johneagle.companyCalculator.advancelogic.TilausToiminnallisuus;
-import Johneagle.companyCalculator.database.Database;
-import Johneagle.companyCalculator.domain.Asiakas;
-import Johneagle.companyCalculator.domain.Tilaus;
-import Johneagle.companyCalculator.domain.Tuote;
+import companycalculator.dao.AsiakasDao;
+import companycalculator.dao.PaivaDao;
+import companycalculator.dao.TilausDao;
+import companycalculator.dao.TuoteDao;
+import companycalculator.advancelogic.TilausToiminnallisuus;
+import companycalculator.database.Database;
+import companycalculator.domain.Asiakas;
+import companycalculator.domain.Tilaus;
+import companycalculator.domain.Tuote;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;

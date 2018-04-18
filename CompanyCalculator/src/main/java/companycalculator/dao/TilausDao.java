@@ -1,10 +1,10 @@
-package Johneagle.companyCalculator.Dao;
+package companycalculator.dao;
 
-import Johneagle.companyCalculator.database.Database;
-import Johneagle.companyCalculator.domain.Asiakas;
-import Johneagle.companyCalculator.domain.Paiva;
-import Johneagle.companyCalculator.domain.Tilaus;
-import Johneagle.companyCalculator.domain.Tuote;
+import companycalculator.database.Database;
+import companycalculator.domain.Asiakas;
+import companycalculator.domain.Paiva;
+import companycalculator.domain.Tilaus;
+import companycalculator.domain.Tuote;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -51,7 +51,7 @@ public class TilausDao implements Dao<Tilaus, Integer> {
             while (result.next()) {
                 List<Tuote> tuotteet = new ArrayList<>();
                 Paiva paiva = this.paivaDao.findOne(result.getInt("paiva_id"));
-                Asiakas asiakas = asiakasDao.findOne(paiva.getAsiakas_id());
+                Asiakas asiakas = asiakasDao.findOne(paiva.getAsiakasId());
 
                 try ( Connection conn2 = database.getConnection() ) {
                     PreparedStatement stmt = conn2.prepareStatement("SELECT * FROM tilaustuote WHERE tilaus_id = ?");
@@ -75,7 +75,7 @@ public class TilausDao implements Dao<Tilaus, Integer> {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO tilaus(status, paiva_id) VALUES(?, ?)");
             stmt.setString(1, uusi.getStatus());
-            stmt.setInt(2, uusi.getPaiva_id());
+            stmt.setInt(2, uusi.getPaivaId());
             stmt.executeUpdate();
         }
 

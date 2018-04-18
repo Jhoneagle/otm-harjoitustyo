@@ -1,11 +1,11 @@
-package Johneagle.companyCalculator.kayttoliittyma;
+package companycalculator.kayttoliittyma;
 
-import Johneagle.companyCalculator.Dao.AsiakasDao;
-import Johneagle.companyCalculator.Dao.TuoteDao;
-import Johneagle.companyCalculator.advancelogic.TilausToiminnallisuus;
-import Johneagle.companyCalculator.domain.Asiakas;
-import Johneagle.companyCalculator.domain.Tilaus;
-import Johneagle.companyCalculator.domain.Tuote;
+import companycalculator.dao.AsiakasDao;
+import companycalculator.dao.TuoteDao;
+import companycalculator.advancelogic.TilausToiminnallisuus;
+import companycalculator.domain.Asiakas;
+import companycalculator.domain.Tilaus;
+import companycalculator.domain.Tuote;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

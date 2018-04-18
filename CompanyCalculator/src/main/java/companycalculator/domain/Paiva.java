@@ -1,14 +1,14 @@
-package Johneagle.companyCalculator.domain;
+package companycalculator.domain;
 
 public class Paiva {
     private int id;
     private String paiva;
-    private int asiakas_id;
+    private int asiakasId;
 
-    public Paiva(int id, String paiva, int asiakas_id) {
+    public Paiva(int id, String paiva, int asiakasId) {
         this.id = id;
         this.paiva = paiva;
-        this.asiakas_id = asiakas_id;
+        this.asiakasId = asiakasId;
     }
 
     public int getId() {
@@ -23,11 +23,11 @@ public class Paiva {
         this.paiva = paiva;
     }
 
-    public int getAsiakas_id() {
-        return asiakas_id;
+    public int getAsiakasId() {
+        return asiakasId;
     }
 
-    public void setAsiakas_id(int asiakas_id) {
-        this.asiakas_id = asiakas_id;
+    public void setAsiakasId(int asiakasId) {
+        this.asiakasId = asiakasId;
     }
 }

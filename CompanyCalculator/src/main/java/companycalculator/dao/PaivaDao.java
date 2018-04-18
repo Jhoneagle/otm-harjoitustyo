@@ -1,7 +1,7 @@
-package Johneagle.companyCalculator.Dao;
+package companycalculator.dao;
 
-import Johneagle.companyCalculator.database.Database;
-import Johneagle.companyCalculator.domain.Paiva;
+import companycalculator.database.Database;
+import companycalculator.domain.Paiva;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -52,7 +52,7 @@ public class PaivaDao implements Dao<Paiva, Integer> {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO paiva(paiva, asiakas_id) VALUES(?, ?)");
             stmt.setString(1, uusi.getPaiva());
-            stmt.setInt(2, uusi.getAsiakas_id());
+            stmt.setInt(2, uusi.getAsiakasId());
             stmt.executeUpdate();
         }
 

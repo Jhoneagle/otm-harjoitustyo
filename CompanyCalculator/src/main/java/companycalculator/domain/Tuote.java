@@ -1,4 +1,4 @@
-package Johneagle.companyCalculator.domain;
+package companycalculator.domain;
 
 public class Tuote {
     private int id;

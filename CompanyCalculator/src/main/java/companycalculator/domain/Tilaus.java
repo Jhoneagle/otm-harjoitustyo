@@ -1,4 +1,4 @@
-package Johneagle.companyCalculator.domain;
+package companycalculator.domain;
 
 import java.util.List;
 
@@ -6,14 +6,14 @@ public class Tilaus {
     private int id;
     private String status;
     private List<Tuote> tuotteet;
-    private int paiva_id;
+    private int paivaId;
     private Asiakas asiakas;
 
-    public Tilaus(Integer id, String status, List<Tuote> tuotteet, int paiva_id, Asiakas asiakas) {
+    public Tilaus(Integer id, String status, List<Tuote> tuotteet, int paivaId, Asiakas asiakas) {
         this.id = id;
         this.status = status;
         this.tuotteet = tuotteet;
-        this.paiva_id = paiva_id;
+        this.paivaId = paivaId;
         this.asiakas = asiakas;
 
     }
@@ -38,12 +38,12 @@ public class Tilaus {
         this.tuotteet = tuotteet;
     }
 
-    public int getPaiva_id() {
-        return paiva_id;
+    public int getPaivaId() {
+        return paivaId;
     }
 
-    public void setPaiva_id(int paiva_id) {
-        this.paiva_id = paiva_id;
+    public void setPaivaId(int paivaId) {
+        this.paivaId = paivaId;
     }
 
     public Asiakas getAsiakas() {

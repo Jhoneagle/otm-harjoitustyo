@@ -1,12 +1,12 @@
-package Johneagle.companyCalculator;
+package companycalculator;
 
-import Johneagle.companyCalculator.Dao.AsiakasDao;
-import Johneagle.companyCalculator.Dao.PaivaDao;
-import Johneagle.companyCalculator.Dao.TilausDao;
-import Johneagle.companyCalculator.Dao.TuoteDao;
-import Johneagle.companyCalculator.advancelogic.TilausToiminnallisuus;
-import Johneagle.companyCalculator.database.Database;
-import Johneagle.companyCalculator.kayttoliittyma.Tekstikayttoliittyma;
+import companycalculator.dao.AsiakasDao;
+import companycalculator.dao.PaivaDao;
+import companycalculator.dao.TilausDao;
+import companycalculator.dao.TuoteDao;
+import companycalculator.advancelogic.TilausToiminnallisuus;
+import companycalculator.database.Database;
+import companycalculator.kayttoliittyma.Tekstikayttoliittyma;
 
 import java.io.FileInputStream;
 import java.util.Properties;

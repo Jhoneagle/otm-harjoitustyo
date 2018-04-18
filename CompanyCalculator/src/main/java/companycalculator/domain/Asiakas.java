@@ -1,4 +1,4 @@
-package Johneagle.companyCalculator.domain;
+package companycalculator.domain;
 
 public class Asiakas {
 
