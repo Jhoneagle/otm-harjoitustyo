@@ -1,3 +1,3 @@
 # Sovellus logiikka
 
-![sovellus logiikka](otm-harjoitustyo/CompanyCalculator/documentation/kuvat/kaavio.png)
+[[https://github.com/Johneagle/otm-harjoitustyo/CompanyCalculator/documentation/kuvat/kaavio.png|alt=sovelluslogiikka]]
