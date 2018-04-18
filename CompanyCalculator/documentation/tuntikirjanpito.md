@@ -7,3 +7,5 @@ paiva | aika | mitä tein
 16.4 | 4 | testejä
 17.4 | 4 | uuden toiminnallisuuden käytöön otto käyttöliittymään
 18.4 | 1 | testit uudellen toiminnallisuudelle
+18.4 | 2 | checkstyle ja jacocoa lisää
+18.4 | 2 | dokumentaatio ajantasalle
