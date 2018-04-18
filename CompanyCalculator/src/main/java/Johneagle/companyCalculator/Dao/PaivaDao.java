@@ -1,7 +1,8 @@
-package dao;
+package Johneagle.companyCalculator.Dao;
 
-import database.Database;
-import domain.Paiva;
+import Johneagle.companyCalculator.Dao.Dao;
+import Johneagle.companyCalculator.database.Database;
+import Johneagle.companyCalculator.domain.Paiva;
 
 import java.sql.*;
 import java.util.ArrayList;

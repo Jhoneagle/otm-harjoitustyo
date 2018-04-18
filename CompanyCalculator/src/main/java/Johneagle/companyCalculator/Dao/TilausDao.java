@@ -1,10 +1,13 @@
-package dao;
+package Johneagle.companyCalculator.Dao;
 
-import database.Database;
-import domain.Asiakas;
-import domain.Paiva;
-import domain.Tilaus;
-import domain.Tuote;
+import Johneagle.companyCalculator.Dao.PaivaDao;
+import Johneagle.companyCalculator.Dao.Dao;
+import Johneagle.companyCalculator.Dao.AsiakasDao;
+import Johneagle.companyCalculator.database.Database;
+import Johneagle.companyCalculator.domain.Asiakas;
+import Johneagle.companyCalculator.domain.Paiva;
+import Johneagle.companyCalculator.domain.Tilaus;
+import Johneagle.companyCalculator.domain.Tuote;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

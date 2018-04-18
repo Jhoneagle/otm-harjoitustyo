@@ -1,4 +1,4 @@
-package dao;
+package Johneagle.companyCalculator.Dao;
 
 import java.sql.SQLException;
 import java.util.List;

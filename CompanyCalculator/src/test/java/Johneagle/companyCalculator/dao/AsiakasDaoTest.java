@@ -1,7 +1,8 @@
-package dao;
+package Johneagle.companyCalculator.dao;
 
-import database.Database;
-import domain.Asiakas;
+import Johneagle.companyCalculator.Dao.AsiakasDao;
+import Johneagle.companyCalculator.database.Database;
+import Johneagle.companyCalculator.domain.Asiakas;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;

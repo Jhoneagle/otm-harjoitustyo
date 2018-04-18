@@ -1,9 +1,13 @@
-package dao;
+package Johneagle.companyCalculator.dao;
 
-import database.Database;
-import domain.Asiakas;
-import domain.Paiva;
-import domain.Tilaus;
+import Johneagle.companyCalculator.Dao.TuoteDao;
+import Johneagle.companyCalculator.Dao.TilausDao;
+import Johneagle.companyCalculator.Dao.PaivaDao;
+import Johneagle.companyCalculator.Dao.AsiakasDao;
+import Johneagle.companyCalculator.database.Database;
+import Johneagle.companyCalculator.domain.Asiakas;
+import Johneagle.companyCalculator.domain.Paiva;
+import Johneagle.companyCalculator.domain.Tilaus;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;

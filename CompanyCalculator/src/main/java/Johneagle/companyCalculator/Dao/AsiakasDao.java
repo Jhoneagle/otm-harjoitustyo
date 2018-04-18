@@ -1,7 +1,7 @@
-package dao;
+package Johneagle.companyCalculator.Dao;
 
-import database.Database;
-import domain.Asiakas;
+import Johneagle.companyCalculator.database.Database;
+import Johneagle.companyCalculator.domain.Asiakas;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

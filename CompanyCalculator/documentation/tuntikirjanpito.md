@@ -4,3 +4,6 @@ paiva | aika | mitä tein
 9.4 | 1 | Databasen lisäys
 9.4 | 3 | Tuotteiden daon luominen ja testaus sekä alkua tekstuaaliselle käyttöliittymälle
 15.4 | 3 | tietokanta taulujen lisäys ja Daojen aloittelu
+16.4 | 4 | testejä
+17.4 | 4 | uuden toiminnallisuuden käytöön otto käyttöliittymään
+18.4 | 1 | testit uudellen toiminnallisuudelle

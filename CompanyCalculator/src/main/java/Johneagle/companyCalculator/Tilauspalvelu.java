@@ -1,6 +1,12 @@
-import dao.TuoteDao;
-import database.Database;
-import kayttoliittyma.Tekstikayttoliittyma;
+package Johneagle.companyCalculator;
+
+import Johneagle.companyCalculator.advancelogic.TilausToiminnallisuus;
+import Johneagle.companyCalculator.Dao.AsiakasDao;
+import Johneagle.companyCalculator.Dao.PaivaDao;
+import Johneagle.companyCalculator.Dao.TilausDao;
+import Johneagle.companyCalculator.Dao.TuoteDao;
+import Johneagle.companyCalculator.database.Database;
+import Johneagle.companyCalculator.kayttoliittyma.Tekstikayttoliittyma;
 
 import java.io.FileInputStream;
 import java.util.Properties;
@@ -15,7 +21,12 @@ public class Tilauspalvelu {
 
         Database database = new Database(databaseAddress);
         TuoteDao tuotedao = new TuoteDao(database);
+        PaivaDao paivadao = new PaivaDao(database);
+        AsiakasDao asiakasdao = new AsiakasDao(database);
+        TilausDao tilausdao = new TilausDao(database, asiakasdao, tuotedao, paivadao);
         Scanner lukija = new Scanner(System.in);
+
+        TilausToiminnallisuus tilauspalvelu = new TilausToiminnallisuus(database, asiakasdao, tuotedao, paivadao, tilausdao);
 
         database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS tuote(id INTEGER PRIMARY KEY, tuotekoodi varchar(255), nimi varchar(255), " +
                 "hinta REAL, alv REAL)").execute();
@@ -28,7 +39,7 @@ public class Tilauspalvelu {
         database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS asiakas(id INTEGER PRIMARY KEY, yritys_nimi varchar(144), ytunnus varchar(144), " +
                 "nimi varchar(144), sahkoposti varchar(144), puhelinnumero varchar(144), osoite varchar(144), postinumero varchar(144), postitoimipaikka varchar(144))").execute();
 
-        Tekstikayttoliittyma liittyma = new Tekstikayttoliittyma(lukija, tuotedao);
+        Tekstikayttoliittyma liittyma = new Tekstikayttoliittyma(lukija, tuotedao, asiakasdao, tilauspalvelu);
         liittyma.start();
     }
 }

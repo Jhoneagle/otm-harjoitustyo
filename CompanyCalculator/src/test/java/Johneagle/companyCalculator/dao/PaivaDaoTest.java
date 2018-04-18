@@ -1,7 +1,8 @@
-package dao;
+package Johneagle.companyCalculator.dao;
 
-import database.Database;
-import domain.Paiva;
+import Johneagle.companyCalculator.Dao.PaivaDao;
+import Johneagle.companyCalculator.database.Database;
+import Johneagle.companyCalculator.domain.Paiva;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;

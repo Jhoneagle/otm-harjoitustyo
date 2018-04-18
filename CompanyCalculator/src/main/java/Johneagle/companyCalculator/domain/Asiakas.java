@@ -1,4 +1,4 @@
-package domain;
+package Johneagle.companyCalculator.domain;
 
 public class Asiakas {
 
@@ -22,6 +22,10 @@ public class Asiakas {
         this.osoite = osoite;
         this.postinumero = postinumero;
         this.postitoimipaikka = postitoimipaikka;
+    }
+
+    public Asiakas() {
+
     }
 
     public int getId() {
