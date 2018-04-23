@@ -62,7 +62,8 @@ public class TilausToiminnallisuus {
             Tilaus temp = tilaukset.get(i);
             Paiva paivamaara = this.paivaDao.findOne(temp.getPaivaId());
 
-            String lisattava = "yritys: " + temp.getAsiakas().getYritysNimi() + ", paiva: "+paivamaara.getPaiva() + ", status: " + temp.getStatus();
+            String lisattava = new StringBuilder().append("yritys: ").append(temp.getAsiakas().getYritysNimi()).append(", paiva: ")
+                    .append(paivamaara.getPaiva()).append(", status: ").append(temp.getStatus()).toString();
             merkkijonot.add(lisattava);
         }
 

@@ -37,7 +37,7 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
     public List<Asiakas> findAll() throws SQLException {
         List<Asiakas> asiakaat = new ArrayList<>();
 
-        try ( Connection conn = database.getConnection() ) {
+        try (Connection conn = database.getConnection()) {
             ResultSet result = conn.prepareStatement("SELECT * FROM asiakas").executeQuery();
 
             while (result.next()) {

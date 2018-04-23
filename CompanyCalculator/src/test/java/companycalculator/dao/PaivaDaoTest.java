@@ -46,7 +46,7 @@ public class PaivaDaoTest {
         Paiva save = dao.save(testi);
 
         assertEquals(testi.getPaiva(), save.getPaiva());
-        assertEquals(testi.getAsiakas_id(), save.getAsiakas_id());
+        assertEquals(testi.getAsiakasId(), save.getAsiakasId());
     }
 
     @Test
@@ -57,7 +57,7 @@ public class PaivaDaoTest {
         Paiva save = dao.findOne(1);
 
         assertTrue(testi.getPaiva().contains(save.getPaiva()));
-        assertEquals(testi.getAsiakas_id(), save.getAsiakas_id());
+        assertEquals(testi.getAsiakasId(), save.getAsiakasId());
     }
 
     @Test
@@ -70,9 +70,9 @@ public class PaivaDaoTest {
         List<Paiva> save = dao.findAll();
 
         assertTrue(testi.getPaiva().contains(save.get(0).getPaiva()));
-        assertEquals(testi.getAsiakas_id(), save.get(0).getAsiakas_id());
+        assertEquals(testi.getAsiakasId(), save.get(0).getAsiakasId());
         assertTrue(testi2.getPaiva().contains(save.get(1).getPaiva()));
-        assertEquals(testi2.getAsiakas_id(), save.get(1).getAsiakas_id());
+        assertEquals(testi2.getAsiakasId(), save.get(1).getAsiakasId());
     }
 
     @After

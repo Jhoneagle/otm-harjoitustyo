@@ -45,7 +45,7 @@ public class TilausDao implements Dao<Tilaus, Integer> {
     public List<Tilaus> findAll() throws SQLException {
         List<Tilaus> tilaukset = new ArrayList<>();
 
-        try ( Connection conn = database.getConnection() ) {
+        try (Connection conn = database.getConnection()) {
             ResultSet result = conn.prepareStatement("SELECT * FROM tilaus").executeQuery();
 
             while (result.next()) {
@@ -53,7 +53,7 @@ public class TilausDao implements Dao<Tilaus, Integer> {
                 Paiva paiva = this.paivaDao.findOne(result.getInt("paiva_id"));
                 Asiakas asiakas = asiakasDao.findOne(paiva.getAsiakasId());
 
-                try ( Connection conn2 = database.getConnection() ) {
+                try (Connection conn2 = database.getConnection()) {
                     PreparedStatement stmt = conn2.prepareStatement("SELECT * FROM tilaustuote WHERE tilaus_id = ?");
                     stmt.setInt(1, result.getInt("id"));
                     ResultSet result2 = stmt.executeQuery();

@@ -37,7 +37,7 @@ public class TuoteDao implements Dao<Tuote, Integer> {
     public List<Tuote> findAll() throws SQLException {
         List<Tuote> tuotteet = new ArrayList<>();
 
-        try ( Connection conn = database.getConnection() ) {
+        try (Connection conn = database.getConnection()) {
             ResultSet result = conn.prepareStatement("SELECT * FROM tuote").executeQuery();
 
             while (result.next()) {

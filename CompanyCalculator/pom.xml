@@ -36,11 +36,11 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.0</version>
-		<configuration>
-		    <excludes>
-		        <exclude>Johneagle/companyCalculator/kayttoliittyma/*</exclude>
-                        <exclude>Johneagle/companyCalculator/Tilauspalvelu.class</exclude>
-		    </excludes>
+		    <configuration>
+                <excludes>
+                    <exclude>companycalculator/kayttoliittyma/*</exclude>
+                    <exclude>companycalculator/Tilauspalvelu.class</exclude>
+                </excludes>
 	        </configuration> 
                 <executions>
                     <execution>
@@ -48,6 +48,27 @@
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>companycalculator.Tilauspalvelu</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

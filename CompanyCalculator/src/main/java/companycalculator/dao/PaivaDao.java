@@ -36,7 +36,7 @@ public class PaivaDao implements Dao<Paiva, Integer> {
     public List<Paiva> findAll() throws SQLException {
         List<Paiva> paivat = new ArrayList<>();
 
-        try ( Connection conn = database.getConnection() ) {
+        try (Connection conn = database.getConnection()) {
             ResultSet result = conn.prepareStatement("SELECT * FROM paiva").executeQuery();
 
             while (result.next()) {

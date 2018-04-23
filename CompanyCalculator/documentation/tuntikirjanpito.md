@@ -9,3 +9,4 @@ paiva | aika | mitä tein
 18.4 | 1 | testit uudellen toiminnallisuudelle
 18.4 | 2 | checkstyle ja jacocoa lisää
 18.4 | 2 | dokumentaatio ajantasalle
+23.4 | 1 | checkstyle ja jacoco käyttö sekä testien korjaus

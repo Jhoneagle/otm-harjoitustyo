@@ -65,7 +65,7 @@ public class TilausDaoTest {
 
         Tilaus lisatty = dao.save(testi);
 
-        assertEquals(testi.getPaiva_id(), lisatty.getPaiva_id());
+        assertEquals(testi.getPaivaId(), lisatty.getPaivaId());
         assertTrue(testi.getStatus().contains(lisatty.getStatus()));
     }
 
@@ -77,7 +77,7 @@ public class TilausDaoTest {
         dao.save(testi);
         Tilaus lisatty = dao.findOne(1);
 
-        assertEquals(testi.getPaiva_id(), lisatty.getPaiva_id());
+        assertEquals(testi.getPaivaId(), lisatty.getPaivaId());
         assertTrue(testi.getStatus().contains(lisatty.getStatus()));
     }
 
@@ -92,9 +92,9 @@ public class TilausDaoTest {
         dao.save(testi2);
         List<Tilaus> lisatyt = dao.findAll();
 
-        assertEquals(testi.getPaiva_id(), lisatyt.get(0).getPaiva_id());
+        assertEquals(testi.getPaivaId(), lisatyt.get(0).getPaivaId());
         assertTrue(testi.getStatus().contains(lisatyt.get(0).getStatus()));
-        assertEquals(testi2.getPaiva_id(), lisatyt.get(1).getPaiva_id());
+        assertEquals(testi2.getPaivaId(), lisatyt.get(1).getPaivaId());
         assertTrue(testi2.getStatus().contains(lisatyt.get(1).getStatus()));
     }
 
