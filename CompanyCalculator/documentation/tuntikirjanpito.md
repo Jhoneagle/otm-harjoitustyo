@@ -1,4 +1,4 @@
-paiva | aika | mitä tein
+﻿paiva | aika | mitä tein
 ----- | ---- | ---------
 25.3 | 3 | Projektin luominen ja dokumentaation sekä tuntikirjanpidon aloitus
 9.4 | 1 | Databasen lisäys
@@ -11,4 +11,5 @@ paiva | aika | mitä tein
 18.4 | 2 | dokumentaatio ajantasalle
 23.4 | 1 | checkstyle ja jacoco käyttö sekä testien korjaus
 24.4 | 5 | jarin luontia
-yht | 29 |
+24.4 | 1 | luokkakaavio päivitys
+yht | 30 |

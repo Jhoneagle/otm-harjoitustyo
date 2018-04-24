@@ -1,3 +1,3 @@
 # Sovellus logiikka
 
-![sovelluslogiikka](kuvat/kaavio.png)
+![sovelluslogiikka](kuvat/luokkakaavio.jpg)
