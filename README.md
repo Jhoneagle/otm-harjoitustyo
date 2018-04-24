@@ -42,7 +42,7 @@ generoi hakemistoon _target_ suoritettavan jar-tiedoston _Company-calculator-1.0
 
 ### Checkstyle
 
-Tiedostoon [checkstyle.xml](https://github.com/Jhoneagle/otm-harjoitustyo/CompanyCalculator/checkstyle.xml) määrittelemät tarkistukset suoritetaan komennolla
+Tiedostoon [checkstyle.xml](otm-harjoitustyo/CompanyCalculator/checkstyle.xml) määrittelemät tarkistukset suoritetaan komennolla
 
 ```
  mvn jxr:jxr checkstyle:checkstyle
