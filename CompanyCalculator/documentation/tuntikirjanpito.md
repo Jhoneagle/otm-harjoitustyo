@@ -1,13 +1,14 @@
-paiva | aika | mitä tein
+paiva | aika | mitÃ¤ tein
 ----- | ---- | ---------
-25.3 | 3 | Projektin luominen ja dokumentaation sekä tuntikirjanpidon aloitus
-9.4 | 1 | Databasen lisäys
-9.4 | 3 | Tuotteiden daon luominen ja testaus sekä alkua tekstuaaliselle käyttöliittymälle
-15.4 | 3 | tietokanta taulujen lisäys ja Daojen aloittelu
-16.4 | 4 | testejä
-17.4 | 4 | uuden toiminnallisuuden käytöön otto käyttöliittymään
+25.3 | 3 | Projektin luominen ja dokumentaation sekÃ¤ tuntikirjanpidon aloitus
+9.4 | 1 | Databasen lisÃ¤ys
+9.4 | 3 | Tuotteiden daon luominen ja testaus sekÃ¤ alkua tekstuaaliselle kÃ¤yttÃ¶liittymÃ¤lle
+15.4 | 3 | tietokanta taulujen lisÃ¤ys ja Daojen aloittelu
+16.4 | 4 | testejÃ¤
+17.4 | 4 | uuden toiminnallisuuden kÃ¤ytÃ¶Ã¶n otto kÃ¤yttÃ¶liittymÃ¤Ã¤n
 18.4 | 1 | testit uudellen toiminnallisuudelle
-18.4 | 2 | checkstyle ja jacocoa lisää
+18.4 | 2 | checkstyle ja jacocoa lisÃ¤Ã¤
 18.4 | 2 | dokumentaatio ajantasalle
-23.4 | 1 | checkstyle ja jacoco käyttö sekä testien korjaus
+23.4 | 1 | checkstyle ja jacoco kÃ¤yttÃ¶ sekÃ¤ testien korjaus
 24.4 | 5 | jarin luontia
+yht | 29 |
