@@ -60,6 +60,11 @@ public class TilausToiminnallisuus {
 
         for (int i = 0; i < tilaukset.size(); i++) {
             Tilaus temp = tilaukset.get(i);
+
+            if (temp.getStatus().contains("valmis")) {
+                continue;
+            }
+
             Paiva paivamaara = this.paivaDao.findOne(temp.getPaivaId());
 
             String lisattava = new StringBuilder().append("yritys: ").append(temp.getAsiakas().getYritysNimi()).append(", paiva: ")
@@ -68,5 +73,35 @@ public class TilausToiminnallisuus {
         }
 
         return merkkijonot;
+    }
+
+    public void muokkaaTilausta(int id, String status, String paiva) throws SQLException {
+        Tilaus tilaus = this.tilausDao.findOne(id);
+        tilaus.setStatus(status);
+
+        Paiva paivamaara = new Paiva(tilaus.getPaivaId(), paiva, tilaus.getAsiakas().getId());
+        if (!paiva.isEmpty()) {
+            paivamaara = paivaDao.save(paivamaara);
+        }
+
+        tilaus.setPaivaId(paivamaara.getId());
+        this.tilausDao.update(tilaus);
+    }
+
+    public void poistaTilaus(int id) throws SQLException {
+        List<Tuote> tuoteet = this.tilausDao.findOne(id).getTuotteet();
+        this.tilausDao.delete(id);
+
+        for (int i = 0; i < tuoteet.size(); i++) {
+            Tuote temp = tuoteet.get(i);
+
+            try (Connection conn = database.getConnection()) {
+                PreparedStatement stmt = conn.prepareStatement(
+                        "DELETE FROM tilaustuote WHERE tilaus_id = ? AND tuote_id = ?");
+                stmt.setInt(1, id);
+                stmt.setInt(2, temp.getId());
+                stmt.execute();
+            }
+        }
     }
 }

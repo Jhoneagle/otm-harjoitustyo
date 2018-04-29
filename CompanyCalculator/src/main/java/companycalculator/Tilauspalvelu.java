@@ -17,7 +17,7 @@ public class Tilauspalvelu {
         Properties properties = new Properties();
 
         properties.load(new FileInputStream("config.properties"));
-        String databaseAddress = "jdbc:sqlite:"+properties.getProperty("mainDatabase");
+        String databaseAddress = "jdbc:sqlite:" + properties.getProperty("mainDatabase");
 
         Database database = new Database(databaseAddress);
         TuoteDao tuotedao = new TuoteDao(database);

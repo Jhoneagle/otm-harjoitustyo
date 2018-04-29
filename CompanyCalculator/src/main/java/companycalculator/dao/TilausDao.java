@@ -85,11 +85,25 @@ public class TilausDao implements Dao<Tilaus, Integer> {
 
     @Override
     public Tilaus update(Tilaus object) throws SQLException {
-        return null;
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("UPDATE tilaus SET status = ?, paiva_id = ? WHERE id = ?");
+            stmt.setString(1, object.getStatus());
+            stmt.setInt(2, object.getPaivaId());
+            stmt.setInt(3, object.getId());
+            stmt.executeUpdate();
+        }
+
+        List<Tilaus> tilaukset = findAll();
+        return tilaukset.get(tilaukset.size() - 1);
     }
 
     @Override
     public void delete(Integer key) throws SQLException {
-
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(
+                    "DELETE FROM tilaus WHERE id = ?");
+            stmt.setInt(1, key);
+            boolean execute = stmt.execute();
+        }
     }
 }

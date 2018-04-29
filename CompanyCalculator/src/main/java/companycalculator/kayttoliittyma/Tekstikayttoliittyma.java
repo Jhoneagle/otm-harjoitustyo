@@ -26,18 +26,28 @@ public class Tekstikayttoliittyma {
         this.tilauspalvelu = tilauspalvelu;
     }
 
-    public void start() throws Exception {
-        System.out.println("Tuotteiden listaus palvelu: ");
+    private void ohjeet() {
         System.out.println("komento 'lisaa tuote' uuden tuotteen lisaamiseksi");
         System.out.println("'listaa tuotteet' kaikkien tuotteiden listaamiseksi");
         System.out.println("'poista tuote' poistaaksesi tuotteen");
         System.out.println("'paivita tuote' muokataksesi tuotetta");
         System.out.println("'lisaa asiakas' lisätäkseksi asiakaan");
+        System.out.println("'listaa asiakaat' listataksesi kaikki asiakaat");
         System.out.println("'lisaa tilaus' lisätäkseksi uuden tilauksen");
         System.out.println("'listaa tilaukset' listatakseksi tilaukset");
+        System.out.println("'muokkaa tilausta' muokataksesi olemassa olevaa tilausta");
+        System.out.println("'poista tilaus' poistaaksesi tilauksen");
+        System.out.println("'komennot' saadaksesi kaikki toiminnot nkyviin");
         System.out.println("'valmis' sulkeaksesi ohjelman");
         System.out.println();
         System.out.println();
+    }
+
+    public void start() throws Exception {
+        System.out.println("Tilausten käsittely palvelu: ");
+        System.out.println("ohjeet: ");
+        System.out.println();
+        ohjeet();
 
         while (true) {
             System.out.print("> ");
@@ -54,10 +64,18 @@ public class Tekstikayttoliittyma {
                 poistaTuote();
             } else if (komento.contains("lisaa asiakas")) {
                 lisaaAsiakas();
+            } else if (komento.contains("listaa asiakaat")) {
+                listaaAsiakaat();
             } else if (komento.contains("lisaa tilaus")) {
                 lisaaTilaus();
             } else if (komento.contains("listaa tilaukset")) {
                 ListaaTilaukset();
+            } else if (komento.contains("muokkaa tilausta")) {
+                muokkaaTilausta();
+            } else if (komento.contains("poista tilaus")) {
+                poistaTilaus();
+            } else if (komento.contains("komennot")) {
+                ohjeet();
             } else {
                 System.out.println("tuntematon tai virheellinen komento!");
             }
@@ -143,6 +161,18 @@ public class Tekstikayttoliittyma {
         }
     }
 
+    private void listaaAsiakaat() throws SQLException {
+        List<Asiakas> asiakaat = asiakasdao.findAll();
+
+        for (int i = 0; i < asiakaat.size(); i++) {
+            Asiakas temp = asiakaat.get(i);
+            System.out.println(new StringBuilder().append("Nimi: ").append(temp.getNimi()).append("yrityksen nimi: ").append(temp.getYritysNimi())
+                    .append(", yrityksen y-tunnus: ").append(temp.getyTunnus()).append(", osoite: ").append(temp.getOsoite())
+                    .append(", postinumero: ").append(temp.getPostinumero()).append(", postitoimipaikka: ").append(temp.getPostitoimipaikka())
+                    .append(", sähköposti: ").append(temp.getSahkoposti()).append(" ja puhelinnumero: ").append(temp.getPuhelinnumero()).toString());
+        }
+    }
+
     private void ListaaTilaukset() {
         List<String> tilaukset = null;
         try {
@@ -189,5 +219,24 @@ public class Tekstikayttoliittyma {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private void muokkaaTilausta() throws SQLException {
+        System.out.print("tilauksen id: ");
+        int id = Integer.parseInt(lukija.nextLine());
+
+        System.out.print("tilauksen uusi status (tilaus vai valmis): ");
+        String status = lukija.nextLine();
+        System.out.print("uusi paivamaara tai tyhjä, jos ei muutosta: ");
+        String paiva = lukija.nextLine();
+
+        this.tilauspalvelu.muokkaaTilausta(id, status, paiva);
+    }
+
+    private void poistaTilaus() throws SQLException {
+        System.out.print("poistettavan tilauksen id: ");
+
+        int id = Integer.parseInt(lukija.nextLine());
+        this.tilauspalvelu.poistaTilaus(id);
     }
 }
