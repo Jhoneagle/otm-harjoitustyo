@@ -225,7 +225,7 @@ public class Tekstikayttoliittyma {
         System.out.print("tilauksen id: ");
         int id = Integer.parseInt(lukija.nextLine());
 
-        System.out.print("tilauksen uusi status (tilaus vai valmis): ");
+        System.out.print("tilauksen uusi status (tilaus vai toimitettu): ");
         String status = lukija.nextLine();
         System.out.print("uusi paivamaara tai tyhjä, jos ei muutosta: ");
         String paiva = lukija.nextLine();

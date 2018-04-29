@@ -10,6 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Luokka tarjoaa tietokannan tuote-taulun kannalta olellisia toimintoja.
+ * Tällä hetkellä tuettuja ovat Lisäys, listaus, id:llä ja tuotekoodilla haku, poisto ja muokkaus.
+ */
 public class TuoteDao implements Dao<Tuote, Integer> {
 
     private Database database;
@@ -18,6 +22,15 @@ public class TuoteDao implements Dao<Tuote, Integer> {
         this.database = database;
     }
 
+    /**
+     * Metodi hakee parametrin perusteella Tuote olion, Tuote olioiden listasta.
+     *
+     * @param   key   Käyttäjän tai ohjelman antama tuote_id.
+     *
+     * @see     TuoteDao#findAll()
+     *
+     * @return Löydetty Tuote olio tai null.
+     */
     @Override
     public Tuote findOne(Integer key) throws SQLException {
         List<Tuote> kaikki = findAll();
@@ -33,6 +46,11 @@ public class TuoteDao implements Dao<Tuote, Integer> {
         return null;
     }
 
+    /**
+     * Metodi hakee kaikki tietueet tuote-taulusta ja luo niistä listan Tuote olioita.
+     *
+     * @return Lista Tuote olioita.
+     */
     @Override
     public List<Tuote> findAll() throws SQLException {
         List<Tuote> tuotteet = new ArrayList<>();
@@ -48,6 +66,15 @@ public class TuoteDao implements Dao<Tuote, Integer> {
         return tuotteet;
     }
 
+    /**
+     * Metodi Muokkaa tuote id:tä vastaavaa tietuetta tuote-taulussa Tuote olion antamien tietojen avulla.
+     *
+     * @param   paivitys   Käyttäjän tai ohjelman antamien tietojen avulla luotu Tuote olio.
+     *
+     * @see     TuoteDao#findByTuotekoodi(String)
+     *
+     * @return Palauttaa saadun olion tai null, jos jo olemassa tuotekoodi jossakin tietueessa.
+     */
     @Override
     public Tuote update(Tuote paivitys) throws SQLException {
         Tuote onko = findByTuotekoodi(paivitys.getTuotekoodi());
@@ -68,6 +95,15 @@ public class TuoteDao implements Dao<Tuote, Integer> {
         return paivitys;
     }
 
+    /**
+     * Metodi luo tuote-tauluun uuden tietueen saadun Tuote olion avulla.
+     *
+     * @param   uusi   Käyttäjän tai ohjelman antamien tietojen avulla luotu Tuote olio.
+     *
+     * @see     TuoteDao#findByTuotekoodi(String)
+     *
+     * @return Luotu tieto Tuote oliona tai null.
+     */
     @Override
     public Tuote save(Tuote uusi) throws SQLException {
         Tuote onko = findByTuotekoodi(uusi.getTuotekoodi());
@@ -87,6 +123,11 @@ public class TuoteDao implements Dao<Tuote, Integer> {
         return findByTuotekoodi(uusi.getTuotekoodi());
     }
 
+    /**
+     * Metodi poistaa tuote-taulusta parametrina saatua id:tä vastaavan tietueen.
+     *
+     * @param   key   Käyttäjän tai ohjelman antama id.
+     */
     @Override
     public void delete(Integer key) throws SQLException {
         try (Connection conn = database.getConnection()) {
@@ -97,6 +138,13 @@ public class TuoteDao implements Dao<Tuote, Integer> {
         }
     }
 
+    /**
+     * Metodi etsii tietokannasta tuote-taulusta parametrin arvon perusteella tietueen ja luo siitä Tuote olion.
+     *
+     * @param   tuotekoodi   Käyttäjän tai ohjelman antma tuotekoodi.
+     *
+     * @return Löydetty Tuote olio tai null.
+     */
     public Tuote findByTuotekoodi(String tuotekoodi) throws SQLException {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tuote WHERE tuotekoodi = ?");

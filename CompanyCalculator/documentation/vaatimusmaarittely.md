@@ -14,10 +14,10 @@ k‰ytt‰ji‰ on alussa vain normaalit k‰ytt‰j‰t. Tulevaisuudessa sovelluksen laajen
 * k‰ytt‰j‰ voi myˆs poistaa tuotteita valikoimasta
 * luoda tarjouksia ja muuttaa ne tilauksiksi
 * merkit‰ tilauksen toimitetuksi, jolloin poistuu kesken er‰isist‰
-* n‰hd‰ tulojen m‰‰r‰n tiettyn‰ aikav‰lin‰
 
 ## Jatkokehitysideoita
 
+* n‰hd‰ tulojen m‰‰r‰n tiettyn‰ aikav‰lin‰
 * kulujen laskenta
 * tuotteiden varasto m‰‰r‰t tai niihin tarvittavien asioiden m‰‰r‰t
 * hinnoittelun tarkennusta

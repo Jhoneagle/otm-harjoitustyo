@@ -12,4 +12,6 @@
 23.4 | 1 | checkstyle ja jacoco käyttö sekä testien korjaus
 24.4 | 5 | jarin luontia
 24.4 | 1 | luokkakaavio päivitys
-yht | 30 |
+29.4 | 2 | uutta toiminnallisuutta ja realesen toimivuuden tarkistus
+29.4 | 3 | javadocin lisäys
+yht | 35 |

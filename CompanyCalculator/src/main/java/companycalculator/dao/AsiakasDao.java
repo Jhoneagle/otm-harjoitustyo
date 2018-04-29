@@ -10,6 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Luokka tarjoaa tietokannan asiakas-taulun kannalta olellisia toimintoja.
+ * Tällä hetkellä tuettuja ovat Lisäys, listaus, id:llä haku ja y-tunnuksella haku.
+ */
 public class AsiakasDao implements Dao<Asiakas, Integer> {
 
     private Database database;
@@ -18,6 +22,15 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
         this.database = database;
     }
 
+    /**
+     * Metodi Hakee id:tä vastaavan asiakaan tietokannasta käyttäen kaikkien etsintää hyväkseen.
+     *
+     * @param   key   Käyttäjän antama tai toiselta toiminnallisuudelta saatu asiakas id.
+     *
+     * @see     AsiakasDao#findAll()
+     *
+     * @return Ei mitään, jos asiakasta ei löydy tai asiakaan sisältävän Asiakas olion, jos löytyy.
+     */
     @Override
     public Asiakas findOne(Integer key) throws SQLException {
         List<Asiakas> kaikki = findAll();
@@ -33,6 +46,11 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
         return null;
     }
 
+    /**
+     * Metodi Hakee tietokannasta kaikki asiakaat, jotka löytää ja luo niistä listan Asiakas olioita..
+     *
+     * @return Palauttaa listan Asiakas olioita, jotka sisältävät kaikki tietokannan asiakas tietueet.
+     */
     @Override
     public List<Asiakas> findAll() throws SQLException {
         List<Asiakas> asiakaat = new ArrayList<>();
@@ -50,24 +68,33 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
         return asiakaat;
     }
 
+    /**
+     * Metodi Lisää tietokantaan uuden asiakas tietueen Asiakas olion antamien arvojen perusteella.
+     *
+     * @param   uusi   Käyttäjän söyteistä luotu Asiakas olio.
+     *
+     * @see     AsiakasDao#findByYtunnus(String)
+     *
+     * @return Palauttaa lisätyn asiakaan hakemalla sen tietokannasta y-tunnuksen avulla.
+     */
     @Override
-    public Asiakas save(Asiakas object) throws SQLException {
+    public Asiakas save(Asiakas uusi) throws SQLException {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO asiakas(yritys_nimi, ytunnus, nimi, sahkoposti, puhelinnumero, osoite, " +
                     "postinumero, postitoimipaikka) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, object.getYritysNimi());
-            stmt.setString(2, object.getyTunnus());
-            stmt.setString(3, object.getNimi());
-            stmt.setString(4, object.getSahkoposti());
-            stmt.setString(5, object.getPuhelinnumero());
-            stmt.setString(6, object.getOsoite());
-            stmt.setString(7, object.getPostinumero());
-            stmt.setString(8, object.getPostitoimipaikka());
+            stmt.setString(1, uusi.getYritysNimi());
+            stmt.setString(2, uusi.getyTunnus());
+            stmt.setString(3, uusi.getNimi());
+            stmt.setString(4, uusi.getSahkoposti());
+            stmt.setString(5, uusi.getPuhelinnumero());
+            stmt.setString(6, uusi.getOsoite());
+            stmt.setString(7, uusi.getPostinumero());
+            stmt.setString(8, uusi.getPostitoimipaikka());
 
             stmt.executeUpdate();
         }
 
-        return findByYtunnus(object.getyTunnus());
+        return findByYtunnus(uusi.getyTunnus());
     }
 
     @Override
@@ -80,6 +107,13 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
 
     }
 
+    /**
+     * Metodi hakee tietokannasta y-tunnusta vastaavan tietueen ja luo sen avulla uuden Asiakas olion.
+     *
+     * @param   yTunnus   Käyttäjän tai ohjelman määrittelemä yrityksen y-tunnus.
+     *
+     * @return Palauttaa löydetyn asiakaan Asiakas oliona.
+     */
     public Asiakas findByYtunnus(String yTunnus) throws SQLException {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM asiakas WHERE ytunnus = ?");

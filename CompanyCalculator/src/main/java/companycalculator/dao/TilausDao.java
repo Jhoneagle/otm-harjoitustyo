@@ -13,6 +13,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Luokka tarjoaa tietokannan tilaus-taulun kannalta olellisia toimintoja.
+ * Tällä hetkellä tuettuja ovat Lisäys, listaus, id:llä haku, poisto ja muokkaus.
+ */
 public class TilausDao implements Dao<Tilaus, Integer> {
     private Database database;
     private AsiakasDao asiakasDao;
@@ -26,6 +30,15 @@ public class TilausDao implements Dao<Tilaus, Integer> {
         this.paivaDao = paivaDao;
     }
 
+    /**
+     * Metodi hakee parametriä vastaavan Tilaus olion, joka haetaan Tilaus oloiden listasta.
+     *
+     * @param   key   Käyttäjän tai ohjelman antama tilaus_id.
+     *
+     * @see     TilausDao#findAll()
+     *
+     * @return Löydetty Tilaus olio tai null.
+     */
     @Override
     public Tilaus findOne(Integer key) throws SQLException {
         List<Tilaus> kaikki = findAll();
@@ -41,6 +54,12 @@ public class TilausDao implements Dao<Tilaus, Integer> {
         return null;
     }
 
+    /**
+     * Metodi hakee kaikki tietueet tilaus-taulusta ja luo niistä Tilaus olioita.
+     * Joihin lisätään samalla tilaustuote-liitostaulun ja tuote-taulun avulla kaikki niihin liittyvät tuotteet Tuote olioina.
+     *
+     * @return lista Tilaus olioita.
+     */
     @Override
     public List<Tilaus> findAll() throws SQLException {
         List<Tilaus> tilaukset = new ArrayList<>();
@@ -70,6 +89,15 @@ public class TilausDao implements Dao<Tilaus, Integer> {
         return tilaukset;
     }
 
+    /**
+     * Metodi luo tilaus-tauluun uuden tietueen Tilaus oliosta saatujen tietojen status ja paiva_id avulla.
+     *
+     * @param   uusi   Käyttäjän tai ohjelman antamien tietojen avulla luotu Tilaus olio.
+     *
+     * @see     TilausDao#findAll()
+     *
+     * @return Luotu tieto tai null.
+     */
     @Override
     public Tilaus save(Tilaus uusi) throws SQLException {
         try (Connection conn = database.getConnection()) {
@@ -83,13 +111,22 @@ public class TilausDao implements Dao<Tilaus, Integer> {
         return tilaukset.get(tilaukset.size() - 1);
     }
 
+    /**
+     * Metodi Muokkaa tilaus id:tä vastaavaa tietuetta tilaus-taulussa Tilaus oliosta saatujen tietojen status ja paiva_id avulla.
+     *
+     * @param   paivitys   Käyttäjän tai ohjelman antamien tietojen avulla luotu Tilaus olio.
+     *
+     * @see     TilausDao#findAll()
+     *
+     * @return Luotu tieto tai null.
+     */
     @Override
-    public Tilaus update(Tilaus object) throws SQLException {
+    public Tilaus update(Tilaus paivitys) throws SQLException {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("UPDATE tilaus SET status = ?, paiva_id = ? WHERE id = ?");
-            stmt.setString(1, object.getStatus());
-            stmt.setInt(2, object.getPaivaId());
-            stmt.setInt(3, object.getId());
+            stmt.setString(1, paivitys.getStatus());
+            stmt.setInt(2, paivitys.getPaivaId());
+            stmt.setInt(3, paivitys.getId());
             stmt.executeUpdate();
         }
 
@@ -97,6 +134,11 @@ public class TilausDao implements Dao<Tilaus, Integer> {
         return tilaukset.get(tilaukset.size() - 1);
     }
 
+    /**
+     * Metodi poistaa tilaus-taulusta parametrina saatua id:tä vastaavan tietueen.
+     *
+     * @param   key   Käyttäjän tai ohjelman antama id.
+     */
     @Override
     public void delete(Integer key) throws SQLException {
         try (Connection conn = database.getConnection()) {

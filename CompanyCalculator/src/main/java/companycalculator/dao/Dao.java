@@ -3,6 +3,9 @@ package companycalculator.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Abstrakti luokka kaikille Daoille.
+ */
 public interface Dao<T, K> {
 
     T findOne(K key) throws SQLException;

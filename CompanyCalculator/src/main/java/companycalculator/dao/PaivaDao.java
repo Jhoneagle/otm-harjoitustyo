@@ -10,6 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Luokka tarjoaa tietokannan paiva-taulun kannalta olellisia toimintoja.
+ * Tällä hetkellä tuettuja ovat Lisäys, listaus ja id:llä haku.
+ */
 public class PaivaDao implements Dao<Paiva, Integer> {
     private Database database;
 
@@ -17,6 +21,15 @@ public class PaivaDao implements Dao<Paiva, Integer> {
         this.database = database;
     }
 
+    /**
+     * Metodi hakee parametriä vastaavan Paiva olion, jonka hakee Paiva oloiden listasta.
+     *
+     * @param   key   Käyttäjän tai ohjelman antama paiva_id.
+     *
+     * @see     PaivaDao#findAll()
+     *
+     * @return Löydetty Paiva olio tai null.
+     */
     @Override
     public Paiva findOne(Integer key) throws SQLException {
         List<Paiva> kaikki = findAll();
@@ -32,6 +45,11 @@ public class PaivaDao implements Dao<Paiva, Integer> {
         return null;
     }
 
+    /**
+     * Metodi kerää tietokannasta kaikki paiva tietueet ja luo niistä listan Paiva olioita.
+     *
+     * @return Paiva olioista muodostuva lista.
+     */
     @Override
     public List<Paiva> findAll() throws SQLException {
         List<Paiva> paivat = new ArrayList<>();
@@ -47,6 +65,15 @@ public class PaivaDao implements Dao<Paiva, Integer> {
         return paivat;
     }
 
+    /**
+     * Metodi luo tietokantaan uuden paiva tietueen parametrinä saadun olion tarjoamien tietojen avulla.
+     *
+     * @param   uusi   Käyttäjän tai ohjelman antamien tietojen perusteella luotu Paiva olio.
+     *
+     * @see     PaivaDao#findAll()
+     *
+     * @return Null tai tietokantaan lisätty Paiva olio.
+     */
     @Override
     public Paiva save(Paiva uusi) throws SQLException {
         try (Connection conn = database.getConnection()) {
