@@ -14,4 +14,5 @@
 24.4 | 1 | luokkakaavio päivitys
 29.4 | 2 | uutta toiminnallisuutta ja realesen toimivuuden tarkistus
 29.4 | 3 | javadocin lisäys
-yht | 35 |
+1.5 | 2 | documentation and new realese
+yht | 37 |
