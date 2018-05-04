@@ -15,4 +15,7 @@
 29.4 | 2 | uutta toiminnallisuutta ja realesen toimivuuden tarkistus
 29.4 | 3 | javadocin lisäys
 1.5 | 2 | documentation and new realese
-yht | 37 |
+2.5 | 3 | fxml luontia
+3.5 | 3 | fxml lisää
+4.5 | 5 | controllerien luonti ja navigointi
+yht | 48 |

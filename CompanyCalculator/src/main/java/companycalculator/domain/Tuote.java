@@ -50,4 +50,9 @@ public class Tuote {
     public void setAlv(double alv) {
         this.alv = alv;
     }
+
+    @Override
+    public String toString() {
+        return "id: " + this.id + ", tuotekoodi: " + this.tuotekoodi + ", nimi: " + this.nimi+ ", hinta: " + this.hinta + ", alv: " + this.alv;
+    }
 }

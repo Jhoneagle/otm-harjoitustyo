@@ -1,4 +1,4 @@
-package companycalculator.kayttoliittyma;
+package companycalculator.ui;
 
 import companycalculator.dao.AsiakasDao;
 import companycalculator.dao.TuoteDao;
@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Textual user interface.
+ * not used if javafx interface works.
+ */
 public class Tekstikayttoliittyma {
 
     private Scanner lukija;

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="companycalculator.ui.NewTuoteController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="410.0" prefWidth="722.0" VBox.vgrow="ALWAYS">
+      <children>
+        <Label alignment="CENTER" layoutX="296.0" layoutY="60.0" style="&#10;" text="Uusi tuote" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+          <font>
+            <Font size="18.0" />
+          </font>
+        </Label>
+            <GridPane layoutY="2.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button onAction="#handleNavigation" userData="0" mnemonicParsing="false" prefHeight="20.0" prefWidth="105.0" text="Aloitus" />
+                  <Button onAction="#handleNavigation" userData="1" layoutX="10.0" layoutY="8.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="105.0" text="Lisää tuote" GridPane.columnIndex="1" />
+                  <Button onAction="#handleNavigation" userData="2" layoutX="110.0" layoutY="8.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="105.0" text="Listaa tuotteet" GridPane.columnIndex="2" />
+                  <Button onAction="#handleNavigation" userData="3" layoutX="210.0" layoutY="8.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="105.0" text="Lisää asiakas" GridPane.columnIndex="3" />
+                  <Button onAction="#handleNavigation" userData="4" layoutX="310.0" layoutY="8.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="105.0" text="listaa asiakaat" GridPane.columnIndex="4" />
+                  <Button onAction="#handleNavigation" userData="5" layoutX="410.0" layoutY="8.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="105.0" text="Lisää tilaus" GridPane.columnIndex="5" />
+                  <Button onAction="#handleNavigation" userData="6" layoutX="410.0" layoutY="35.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="105.0" text="Listaa tilaukset" GridPane.columnIndex="6" />
+               </children>
+            </GridPane>
+            <Button layoutX="316.0" layoutY="288.0" mnemonicParsing="false" text="Lisää" />
+            <TextField layoutX="262.0" layoutY="113.0" />
+            <Label layoutX="180.0" layoutY="117.0" text="Tuotteen nimi: " />
+            <Label layoutX="193.0" layoutY="158.0" text="Tuotekoodi: " />
+            <TextField layoutX="262.0" layoutY="154.0" />
+            <Label layoutX="225.0" layoutY="198.0" text="Hinta: " />
+            <TextField layoutX="262.0" layoutY="194.0" />
+            <Label layoutX="234.0" layoutY="235.0" text="Alv: " />
+            <TextField layoutX="262.0" layoutY="231.0" />
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

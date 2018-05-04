@@ -91,4 +91,9 @@ public class Asiakas {
     public void setPostitoimipaikka(String postitoimipaikka) {
         this.postitoimipaikka = postitoimipaikka;
     }
+
+    @Override
+    public String toString() {
+        return "";
+    }
 }
