@@ -2,18 +2,28 @@ package companycalculator.ui;
 
 import companycalculator.Tilauspalvelu;
 import companycalculator.database.DbLauncher;
+import companycalculator.domain.Tuote;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 
 public class ListTuoteController implements Initializable {
     private DbLauncher dbLauncher;
     private Tilauspalvelu application;
 
+    @FXML private ListView<Tuote> listView;
+    
+    @FXML
+    private Button removeButton;
+    
     public void setDbLauncher(DbLauncher todoService) {
         this.dbLauncher = todoService;
     }
@@ -53,8 +63,21 @@ public class ListTuoteController implements Initializable {
         }
     }
 
+    @FXML
+    void remove(ActionEvent event) {
+        Tuote tuote = this.listView.getSelectionModel().getSelectedItem();
+        if (tuote != null) {
+            this.dbLauncher.getTuotedao().delete(tuote.getId());
+        }
+    }
+    
+    @FXML
+    void edit(ActionEvent event) {
+        
+    }
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        this.listView.getItems().addAll(this.dbLauncher.getTuotedao().findAll());
     }
 }

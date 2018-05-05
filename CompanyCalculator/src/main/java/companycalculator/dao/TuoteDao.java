@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Luokka tarjoaa tietokannan tuote-taulun kannalta olellisia toimintoja.
@@ -32,7 +34,7 @@ public class TuoteDao implements Dao<Tuote, Integer> {
      * @return Löydetty Tuote olio tai null.
      */
     @Override
-    public Tuote findOne(Integer key) throws SQLException {
+    public Tuote findOne(Integer key) {
         List<Tuote> kaikki = findAll();
 
         for (int i = 0; i < kaikki.size(); i++) {
@@ -52,7 +54,7 @@ public class TuoteDao implements Dao<Tuote, Integer> {
      * @return Lista Tuote olioita.
      */
     @Override
-    public List<Tuote> findAll() throws SQLException {
+    public List<Tuote> findAll() {
         List<Tuote> tuotteet = new ArrayList<>();
 
         try (Connection conn = database.getConnection()) {
@@ -61,6 +63,8 @@ public class TuoteDao implements Dao<Tuote, Integer> {
             while (result.next()) {
                 tuotteet.add(new Tuote(result.getInt("id"), result.getString("tuotekoodi"), result.getString("nimi"), result.getDouble("hinta"), result.getDouble("alv")));
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(TuoteDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return tuotteet;
@@ -76,7 +80,7 @@ public class TuoteDao implements Dao<Tuote, Integer> {
      * @return Palauttaa saadun olion tai null, jos jo olemassa tuotekoodi jossakin tietueessa.
      */
     @Override
-    public Tuote update(Tuote paivitys) throws SQLException {
+    public Tuote update(Tuote paivitys) {
         Tuote onko = findByTuotekoodi(paivitys.getTuotekoodi());
         if (onko != null) {
             return null;
@@ -90,6 +94,8 @@ public class TuoteDao implements Dao<Tuote, Integer> {
             stmt.setDouble(4, paivitys.getAlv());
             stmt.setInt(5, paivitys.getId());
             stmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(TuoteDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return paivitys;
@@ -105,7 +111,7 @@ public class TuoteDao implements Dao<Tuote, Integer> {
      * @return Luotu tieto Tuote oliona tai null.
      */
     @Override
-    public Tuote save(Tuote uusi) throws SQLException {
+    public Tuote save(Tuote uusi) {
         Tuote onko = findByTuotekoodi(uusi.getTuotekoodi());
         if (onko != null) {
             return null;
@@ -118,6 +124,8 @@ public class TuoteDao implements Dao<Tuote, Integer> {
             stmt.setDouble(3, uusi.getHinta());
             stmt.setDouble(4, uusi.getAlv());
             stmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(TuoteDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return findByTuotekoodi(uusi.getTuotekoodi());
@@ -129,12 +137,14 @@ public class TuoteDao implements Dao<Tuote, Integer> {
      * @param   key   Käyttäjän tai ohjelman antama id.
      */
     @Override
-    public void delete(Integer key) throws SQLException {
+    public void delete(Integer key) {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(
                     "DELETE FROM tuote WHERE id = ?");
             stmt.setInt(1, key);
             boolean execute = stmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(TuoteDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -145,7 +155,7 @@ public class TuoteDao implements Dao<Tuote, Integer> {
      *
      * @return Löydetty Tuote olio tai null.
      */
-    public Tuote findByTuotekoodi(String tuotekoodi) throws SQLException {
+    public Tuote findByTuotekoodi(String tuotekoodi) {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tuote WHERE tuotekoodi = ?");
             stmt.setString(1, tuotekoodi);
@@ -156,6 +166,9 @@ public class TuoteDao implements Dao<Tuote, Integer> {
             }
 
             return new Tuote(result.getInt("id"), result.getString("tuotekoodi"), result.getString("nimi"), result.getDouble("hinta"), result.getDouble("alv"));
+        } catch (SQLException ex) {
+            Logger.getLogger(TuoteDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
     }
 }

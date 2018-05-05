@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Luokka tarjoaa tietokannan paiva-taulun kannalta olellisia toimintoja.
@@ -31,7 +33,7 @@ public class PaivaDao implements Dao<Paiva, Integer> {
      * @return Löydetty Paiva olio tai null.
      */
     @Override
-    public Paiva findOne(Integer key) throws SQLException {
+    public Paiva findOne(Integer key) {
         List<Paiva> kaikki = findAll();
 
         for (int i = 0; i < kaikki.size(); i++) {
@@ -51,7 +53,7 @@ public class PaivaDao implements Dao<Paiva, Integer> {
      * @return Paiva olioista muodostuva lista.
      */
     @Override
-    public List<Paiva> findAll() throws SQLException {
+    public List<Paiva> findAll() {
         List<Paiva> paivat = new ArrayList<>();
 
         try (Connection conn = database.getConnection()) {
@@ -60,6 +62,8 @@ public class PaivaDao implements Dao<Paiva, Integer> {
             while (result.next()) {
                 paivat.add(new Paiva(result.getInt("id"), result.getString("paiva"), result.getInt("asiakas_id")));
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(PaivaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return paivat;
@@ -75,12 +79,14 @@ public class PaivaDao implements Dao<Paiva, Integer> {
      * @return Null tai tietokantaan lisätty Paiva olio.
      */
     @Override
-    public Paiva save(Paiva uusi) throws SQLException {
+    public Paiva save(Paiva uusi) {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO paiva(paiva, asiakas_id) VALUES(?, ?)");
             stmt.setString(1, uusi.getPaiva());
             stmt.setInt(2, uusi.getAsiakasId());
             stmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PaivaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         List<Paiva> paivat = findAll();
@@ -88,12 +94,12 @@ public class PaivaDao implements Dao<Paiva, Integer> {
     }
 
     @Override
-    public Paiva update(Paiva object) throws SQLException {
+    public Paiva update(Paiva object) {
         return null;
     }
 
     @Override
-    public void delete(Integer key) throws SQLException {
+    public void delete(Integer key) {
 
     }
 }

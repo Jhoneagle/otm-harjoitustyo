@@ -15,6 +15,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Varsinainen sovellus logiikka tietokannan hallintaan tilausten osalta.
@@ -51,7 +53,7 @@ public class TilausToiminnallisuus {
      * @see     TilausDao#save(Tilaus)
      * @see     TuoteDao#findByTuotekoodi(String)
      */
-    public void lisaaTilaus(Tilaus uusi, List<String> tuotekoodit, String ytunnus, String paiva, List<Integer> tuotemaara) throws SQLException {
+    public void addTilaus(Tilaus uusi, List<String> tuotekoodit, String ytunnus, String paiva, List<Integer> tuotemaara) {
         Asiakas asiakas = asiakasDao.findByYtunnus(ytunnus);
         Paiva paivamaara = new Paiva(0, paiva, asiakas.getId());
 
@@ -70,6 +72,8 @@ public class TilausToiminnallisuus {
                 stmt.setInt(3, temp.getId());
 
                 stmt.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(TilausToiminnallisuus.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -82,9 +86,9 @@ public class TilausToiminnallisuus {
      *
      * @return lista merkkijonoja, joissa on tietoja tilauksista.
      */
-    public List<String> listaaTilaukset() throws SQLException {
+    public List<String> listTilaukset() {
         List<Tilaus> tilaukset = tilausDao.findAll();
-        List<String> merkkijonot = new ArrayList<>();
+        List<String> string = new ArrayList<>();
 
         for (int i = 0; i < tilaukset.size(); i++) {
             Tilaus temp = tilaukset.get(i);
@@ -95,12 +99,14 @@ public class TilausToiminnallisuus {
 
             Paiva paivamaara = this.paivaDao.findOne(temp.getPaivaId());
 
-            String lisattava = new StringBuilder().append("yritys: ").append(temp.getAsiakas().getYritysNimi()).append(", paiva: ")
+            String lisattava = new StringBuilder().append("yritys: ").append(temp.getAsiakas().getYritysNimi())
+                    .append(", yrityksen y-tunnus: ").append(temp.getAsiakas().getyTunnus()).append(", paiva: ")
                     .append(paivamaara.getPaiva()).append(", status: ").append(temp.getStatus()).toString();
-            merkkijonot.add(lisattava);
+            
+            string.add(lisattava);
         }
 
-        return merkkijonot;
+        return string;
     }
 
     /**
@@ -114,16 +120,16 @@ public class TilausToiminnallisuus {
      * @see     PaivaDao#save(Paiva)
      * @see     TilausDao#update(Tilaus)
      */
-    public void muokkaaTilausta(int id, String status, String paiva) throws SQLException {
+    public void editTilausta(int id, String status, String paiva) {
         Tilaus tilaus = this.tilausDao.findOne(id);
         tilaus.setStatus(status);
 
-        Paiva paivamaara = new Paiva(tilaus.getPaivaId(), paiva, tilaus.getAsiakas().getId());
+        Paiva date = new Paiva(tilaus.getPaivaId(), paiva, tilaus.getAsiakas().getId());
         if (!paiva.isEmpty()) {
-            paivamaara = paivaDao.save(paivamaara);
+            date = paivaDao.save(date);
         }
 
-        tilaus.setPaivaId(paivamaara.getId());
+        tilaus.setPaivaId(date.getId());
         this.tilausDao.update(tilaus);
     }
 
@@ -135,12 +141,12 @@ public class TilausToiminnallisuus {
      * @see     TilausDao#findOne(Integer)
      * @see     TilausDao#delete(Integer)
      */
-    public void poistaTilaus(int id) throws SQLException {
-        List<Tuote> tuoteet = this.tilausDao.findOne(id).getTuotteet();
+    public void removeTilaus(int id) {
+        List<Tuote> tuotteet = this.tilausDao.findOne(id).getTuotteet();
         this.tilausDao.delete(id);
 
-        for (int i = 0; i < tuoteet.size(); i++) {
-            Tuote temp = tuoteet.get(i);
+        for (int i = 0; i < tuotteet.size(); i++) {
+            Tuote temp = tuotteet.get(i);
 
             try (Connection conn = database.getConnection()) {
                 PreparedStatement stmt = conn.prepareStatement(
@@ -148,7 +154,36 @@ public class TilausToiminnallisuus {
                 stmt.setInt(1, id);
                 stmt.setInt(2, temp.getId());
                 stmt.execute();
+            } catch (SQLException ex) {
+                Logger.getLogger(TilausToiminnallisuus.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    /**
+     * Hakee ytunnuksen ja statuksen perusteella tilausta.
+     *
+     * @param   ytunnus  KÃ¤yttÃ¤jÃ¤ltÃ¤ saatu asiakaan y-tunnus.
+     * @param   status   Käyttäjältä saatu tilauksen status.
+     * 
+     * @see     TilausDao#findAll()
+     * @see     AsiakasDao#findByYtunnus(java.lang.String) 
+     *
+     * @return löydetyn tilauksen tai null.
+     */
+    public Tilaus findTilaus(String ytunnus, String status) {
+        Asiakas asiakas = this.asiakasDao.findByYtunnus(ytunnus);
+        List<Tilaus> tilaukset = this.tilausDao.findAll();
+        
+        for (int i = 0; i < tilaukset.size(); i++) {
+            Tilaus temp = tilaukset.get(i);
+            if (temp.getAsiakas().getId() == asiakas.getId()) {
+                if (temp.getStatus().contains(status)) {
+                    return temp;
+                }
+            }
+        }
+        
+        return null;
     }
 }

@@ -42,9 +42,9 @@
                   <Button onAction="#handleNavigation" userData="6" layoutX="410.0" layoutY="35.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="105.0" text="Listaa tilaukset" GridPane.columnIndex="6" />
                </children>
             </GridPane>
-            <ListView layoutX="240.0" layoutY="99.0" prefHeight="228.0" prefWidth="220.0" />
-            <Button layoutX="240.0" layoutY="344.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="113.0" text="poista valittu" />
-            <Button layoutX="363.0" layoutY="344.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="113.0" text="Muokkaa valittua" />
+            <ListView fx:id="listView" layoutX="240.0" layoutY="99.0" prefHeight="228.0" prefWidth="220.0" />
+            <Button fx:id="removeButton" layoutX="240.0" layoutY="344.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="113.0" onAction="#remove" text="poista valittu" />
+            <Button fx:id="editButton" layoutX="363.0" layoutY="344.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="113.0" onAction="#edit" text="Muokkaa valittua" />
       </children>
     </AnchorPane>
   </children>

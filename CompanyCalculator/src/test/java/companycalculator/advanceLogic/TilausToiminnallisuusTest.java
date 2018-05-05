@@ -39,11 +39,17 @@ public class TilausToiminnallisuusTest {
     @Before
     public void setUp() throws Exception {
         Properties properties = new Properties();
-
-        properties.load(new FileInputStream("config.properties"));
-        tempFile = tempFolder.newFile(properties.getProperty("testDatabaseFile"));
-        String databaseAddress = "jdbc:sqlite:"+tempFile.getAbsolutePath();
-
+        String databaseAddress = "";
+        
+        try {
+            properties.load(new FileInputStream("config.properties"));
+            tempFile = tempFolder.newFile(properties.getProperty("testDatabaseFile"));
+            databaseAddress = "jdbc:sqlite:"+tempFile.getAbsolutePath();
+        } catch(Exception e) {
+            tempFile = tempFolder.newFile("test.db");
+            databaseAddress = "jdbc:sqlite:"+tempFile.getAbsolutePath();
+        }
+        
         this.database = new Database(databaseAddress);
         this.tuotedao = new TuoteDao(database);
         this.paivadao = new PaivaDao(database);
@@ -88,9 +94,9 @@ public class TilausToiminnallisuusTest {
         tuotekoodit.add(testi.getTuotekoodi());
         tuotekoodit.add(testi2.getTuotekoodi());
 
-        tilauspalvelu.lisaaTilaus(uusi, tuotekoodit, ytunnus, paiva, tuotemaara);
+        tilauspalvelu.addTilaus(uusi, tuotekoodit, ytunnus, paiva, tuotemaara);
 
-        List<String> tilaukset = tilauspalvelu.listaaTilaukset();
+        List<String> tilaukset = tilauspalvelu.listTilaukset();
         String malli = "yritys: "+a.getYritysNimi()+", paiva: "+paiva+", status: "+uusi.getStatus();
 
         assertTrue(malli.contains(tilaukset.get(0)));
@@ -119,7 +125,7 @@ public class TilausToiminnallisuusTest {
         tuotekoodit.add(testi.getTuotekoodi());
         tuotekoodit.add(testi2.getTuotekoodi());
 
-        tilauspalvelu.lisaaTilaus(uusi, tuotekoodit, ytunnus, paiva, tuotemaara);
+        tilauspalvelu.addTilaus(uusi, tuotekoodit, ytunnus, paiva, tuotemaara);
 
         //tilaus 2
 
@@ -141,11 +147,11 @@ public class TilausToiminnallisuusTest {
         tuotekoodit.add(testi1.getTuotekoodi());
         tuotekoodit.add(testi12.getTuotekoodi());
 
-        tilauspalvelu.lisaaTilaus(uusi2, tuotekoodit2, ytunnus2, paiva2, tuotemaara);
+        tilauspalvelu.addTilaus(uusi2, tuotekoodit2, ytunnus2, paiva2, tuotemaara);
 
         //tarkastus
 
-        List<String> tilaukset = tilauspalvelu.listaaTilaukset();
+        List<String> tilaukset = tilauspalvelu.listTilaukset();
         String malli = "yritys: "+a.getYritysNimi()+", paiva: "+paiva+", status: "+uusi.getStatus();
         String malli2 = "yritys: "+a2.getYritysNimi()+", paiva: "+paiva2+", status: "+uusi2.getStatus();
 

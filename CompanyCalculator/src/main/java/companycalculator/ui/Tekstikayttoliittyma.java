@@ -86,7 +86,7 @@ public class Tekstikayttoliittyma {
         }
     }
 
-    private void lisaaTuote() throws Exception {
+    private void lisaaTuote() {
         System.out.print("tuotekoodi (täytyy olla uniikki): ");
         String tuotekoodi = lukija.nextLine();
         System.out.print("nimi: ");
@@ -96,7 +96,7 @@ public class Tekstikayttoliittyma {
         System.out.print("alv: ");
         double alv = Double.parseDouble(lukija.nextLine());
 
-        Tuote tulos = tuotedao.save(new Tuote(0, tuotekoodi, nimi, hinta, alv));
+        Tuote tulos = this.tuotedao.save(new Tuote(0, tuotekoodi, nimi, hinta, alv));
         if (tulos != null) {
             System.out.println("Lisays onnistui.");
         } else {
@@ -104,7 +104,7 @@ public class Tekstikayttoliittyma {
         }
     }
 
-    private void paivitaTuote() throws Exception {
+    private void paivitaTuote() {
         System.out.print("paivitettavan id: ");
         int id = Integer.parseInt(lukija.nextLine());
         System.out.print("uusi tuotekoodi: ");
@@ -116,7 +116,7 @@ public class Tekstikayttoliittyma {
         System.out.print("uusi alv: ");
         double uusiAlv = Double.parseDouble(lukija.nextLine());
 
-        Tuote tulos = tuotedao.update(new Tuote(id, uusiTuotekoodi, uusiNimi, uusiHinta, uusiAlv));
+        Tuote tulos = this.tuotedao.update(new Tuote(id, uusiTuotekoodi, uusiNimi, uusiHinta, uusiAlv));
         if (tulos != null) {
             System.out.println("paivitys onnistui.");
         } else {
@@ -124,18 +124,18 @@ public class Tekstikayttoliittyma {
         }
     }
 
-    private void listaaTuoteet() throws Exception {
-        List<Tuote> tuotteet = tuotedao.findAll();
+    private void listaaTuoteet() {
+        List<Tuote> tuotteet = this.tuotedao.findAll();
         for (int i = 0; i < tuotteet.size(); i++) {
             Tuote temp = tuotteet.get(i);
             System.out.println("id: " + temp.getId() + ", tuotekoodi: " + temp.getTuotekoodi() + ", nimi: " + temp.getNimi() + ", hinta: " + temp.getHinta() + ", alv: " + temp.getAlv());
         }
     }
 
-    private void poistaTuote() throws Exception {
+    private void poistaTuote() {
         System.out.print("poistettavan tuotteen id: ");
         int id = Integer.parseInt(lukija.nextLine());
-        tuotedao.delete(id);
+        this.tuotedao.delete(id);
     }
 
     private void lisaaAsiakas() {
@@ -158,15 +158,11 @@ public class Tekstikayttoliittyma {
 
         Asiakas lisattava = new Asiakas(0, yritysNimi, yTunnus, nimi, sahkoposti, puhelinNumero, osoite, postinumero, postitoimipaikka);
 
-        try {
-            asiakasdao.save(lisattava);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        this.asiakasdao.save(lisattava);
     }
 
-    private void listaaAsiakaat() throws SQLException {
-        List<Asiakas> asiakaat = asiakasdao.findAll();
+    private void listaaAsiakaat() {
+        List<Asiakas> asiakaat = this.asiakasdao.findAll();
 
         for (int i = 0; i < asiakaat.size(); i++) {
             Asiakas temp = asiakaat.get(i);
@@ -178,13 +174,8 @@ public class Tekstikayttoliittyma {
     }
 
     private void ListaaTilaukset() {
-        List<String> tilaukset = null;
-        try {
-            tilaukset = tilauspalvelu.listaaTilaukset();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+        List<String> tilaukset = this.tilauspalvelu.listTilaukset();
+        
         for (int i = 0; i < tilaukset.size(); i++) {
             System.out.println(tilaukset.get(i));
         }
@@ -218,11 +209,7 @@ public class Tekstikayttoliittyma {
         }
 
         Tilaus tilaus = new Tilaus(0, status, new ArrayList<>(), 0, new Asiakas());
-        try {
-            tilauspalvelu.lisaaTilaus(tilaus, tuotekoodit, yTunnus, paiva, tuotemaarat);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        this.tilauspalvelu.addTilaus(tilaus, tuotekoodit, yTunnus, paiva, tuotemaarat);
     }
 
     private void muokkaaTilausta() throws SQLException {
@@ -234,13 +221,13 @@ public class Tekstikayttoliittyma {
         System.out.print("uusi paivamaara tai tyhjä, jos ei muutosta: ");
         String paiva = lukija.nextLine();
 
-        this.tilauspalvelu.muokkaaTilausta(id, status, paiva);
+        this.tilauspalvelu.editTilausta(id, status, paiva);
     }
 
     private void poistaTilaus() throws SQLException {
         System.out.print("poistettavan tilauksen id: ");
 
         int id = Integer.parseInt(lukija.nextLine());
-        this.tilauspalvelu.poistaTilaus(id);
+        this.tilauspalvelu.removeTilaus(id);
     }
 }

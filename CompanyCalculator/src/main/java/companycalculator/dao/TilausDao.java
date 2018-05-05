@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Luokka tarjoaa tietokannan tilaus-taulun kannalta olellisia toimintoja.
@@ -40,7 +42,7 @@ public class TilausDao implements Dao<Tilaus, Integer> {
      * @return Löydetty Tilaus olio tai null.
      */
     @Override
-    public Tilaus findOne(Integer key) throws SQLException {
+    public Tilaus findOne(Integer key) {
         List<Tilaus> kaikki = findAll();
 
         for (int i = 0; i < kaikki.size(); i++) {
@@ -61,7 +63,7 @@ public class TilausDao implements Dao<Tilaus, Integer> {
      * @return lista Tilaus olioita.
      */
     @Override
-    public List<Tilaus> findAll() throws SQLException {
+    public List<Tilaus> findAll() {
         List<Tilaus> tilaukset = new ArrayList<>();
 
         try (Connection conn = database.getConnection()) {
@@ -80,10 +82,14 @@ public class TilausDao implements Dao<Tilaus, Integer> {
                     while (result2.next()) {
                         tuotteet.add(tuoteDao.findOne(result2.getInt("tuote_id")));
                     }
+                } catch (SQLException ex) {
+                    Logger.getLogger(TilausDao.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 tilaukset.add(new Tilaus(result.getInt("id"), result.getString("status"), tuotteet, result.getInt("paiva_id"), asiakas));
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(TilausDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return tilaukset;
@@ -99,12 +105,14 @@ public class TilausDao implements Dao<Tilaus, Integer> {
      * @return Luotu tieto tai null.
      */
     @Override
-    public Tilaus save(Tilaus uusi) throws SQLException {
+    public Tilaus save(Tilaus uusi) {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO tilaus(status, paiva_id) VALUES(?, ?)");
             stmt.setString(1, uusi.getStatus());
             stmt.setInt(2, uusi.getPaivaId());
             stmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(TilausDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         List<Tilaus> tilaukset = findAll();
@@ -121,13 +129,15 @@ public class TilausDao implements Dao<Tilaus, Integer> {
      * @return Luotu tieto tai null.
      */
     @Override
-    public Tilaus update(Tilaus paivitys) throws SQLException {
+    public Tilaus update(Tilaus paivitys) {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("UPDATE tilaus SET status = ?, paiva_id = ? WHERE id = ?");
             stmt.setString(1, paivitys.getStatus());
             stmt.setInt(2, paivitys.getPaivaId());
             stmt.setInt(3, paivitys.getId());
             stmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(TilausDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         List<Tilaus> tilaukset = findAll();
@@ -140,12 +150,14 @@ public class TilausDao implements Dao<Tilaus, Integer> {
      * @param   key   Käyttäjän tai ohjelman antama id.
      */
     @Override
-    public void delete(Integer key) throws SQLException {
+    public void delete(Integer key) {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(
                     "DELETE FROM tilaus WHERE id = ?");
             stmt.setInt(1, key);
             boolean execute = stmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(TilausDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

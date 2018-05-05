@@ -26,11 +26,17 @@ public class AsiakasDaoTest {
     @Before
     public void setUp() throws Exception {
         Properties properties = new Properties();
-
-        properties.load(new FileInputStream("config.properties"));
-        tempFile = tempFolder.newFile(properties.getProperty("testDatabaseFile"));
-        String databaseAddress = "jdbc:sqlite:"+tempFile.getAbsolutePath();
-
+        String databaseAddress = "";
+        
+        try {
+            properties.load(new FileInputStream("config.properties"));
+            tempFile = tempFolder.newFile(properties.getProperty("testDatabaseFile"));
+            databaseAddress = "jdbc:sqlite:"+tempFile.getAbsolutePath();
+        } catch(Exception e) {
+            tempFile = tempFolder.newFile("test.db");
+            databaseAddress = "jdbc:sqlite:"+tempFile.getAbsolutePath();
+        }
+        
         Database database = new Database(databaseAddress);
 
         database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS asiakas(id INTEGER PRIMARY KEY, yritys_nimi varchar(50), ytunnus varchar(50), " +

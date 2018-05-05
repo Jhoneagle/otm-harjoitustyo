@@ -29,11 +29,11 @@ public class Asiakas {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public String getYritysNimi() {
-        return yritysNimi;
+        return this.yritysNimi;
     }
 
     public void setYritysNimi(String yritysNimi) {
@@ -41,11 +41,11 @@ public class Asiakas {
     }
 
     public String getyTunnus() {
-        return yTunnus;
+        return this.yTunnus;
     }
 
     public String getNimi() {
-        return nimi;
+        return this.nimi;
     }
 
     public void setNimi(String nimi) {
@@ -53,7 +53,7 @@ public class Asiakas {
     }
 
     public String getSahkoposti() {
-        return sahkoposti;
+        return this.sahkoposti;
     }
 
     public void setSahkoposti(String sahkoposti) {
@@ -61,7 +61,7 @@ public class Asiakas {
     }
 
     public String getPuhelinnumero() {
-        return puhelinnumero;
+        return this.puhelinnumero;
     }
 
     public void setPuhelinnumero(String puhelinnumero) {
@@ -69,7 +69,7 @@ public class Asiakas {
     }
 
     public String getOsoite() {
-        return osoite;
+        return this.osoite;
     }
 
     public void setOsoite(String osoite) {
@@ -77,7 +77,7 @@ public class Asiakas {
     }
 
     public String getPostinumero() {
-        return postinumero;
+        return this.postinumero;
     }
 
     public void setPostinumero(String postinumero) {
@@ -85,7 +85,7 @@ public class Asiakas {
     }
 
     public String getPostitoimipaikka() {
-        return postitoimipaikka;
+        return this.postitoimipaikka;
     }
 
     public void setPostitoimipaikka(String postitoimipaikka) {
@@ -94,6 +94,8 @@ public class Asiakas {
 
     @Override
     public String toString() {
-        return "";
+        return "Nimi: " + this.nimi + ", sähköposti: " + this.sahkoposti + ", puhelinnumero: " + this.puhelinnumero + "yritys: "
+                + this.yritysNimi + ", yrityksen y-tunnus: " + this.yTunnus + ", osoite: " + this.osoite + ", postinumero: "
+                + this.postinumero + ", postitoimipaikka: "+ this.postitoimipaikka;
     }
 }

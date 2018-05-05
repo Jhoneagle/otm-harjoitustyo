@@ -18,4 +18,5 @@
 2.5 | 3 | fxml luontia
 3.5 | 3 | fxml lisää
 4.5 | 5 | controllerien luonti ja navigointi
+5.5 | 4 | ui controls
 yht | 48 |
