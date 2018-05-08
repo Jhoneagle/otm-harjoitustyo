@@ -23,4 +23,5 @@
 7.5 | 6 | loppu tarkistukset
 8.5 | 3 | dokumentaatio
 8.5 | 3 | dokumentaatio loppuun
-yht | 61 |
+9.5 | 2 | lähellä loppua
+yht | 63 |
