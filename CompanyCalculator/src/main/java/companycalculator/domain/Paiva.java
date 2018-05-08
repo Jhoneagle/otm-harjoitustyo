@@ -12,11 +12,11 @@ public class Paiva {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public String getPaiva() {
-        return paiva;
+        return this.paiva;
     }
 
     public void setPaiva(String paiva) {
@@ -24,7 +24,7 @@ public class Paiva {
     }
 
     public int getAsiakasId() {
-        return asiakasId;
+        return this.asiakasId;
     }
 
     public void setAsiakasId(int asiakasId) {

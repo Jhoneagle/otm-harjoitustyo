@@ -19,11 +19,11 @@ public class Tilaus {
     }
 
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public String getStatus() {
-        return status;
+        return this.status;
     }
 
     public void setStatus(String status) {
@@ -31,7 +31,7 @@ public class Tilaus {
     }
 
     public List<Tuote> getTuotteet() {
-        return tuotteet;
+        return this.tuotteet;
     }
 
     public void setTuotteet(List<Tuote> tuotteet) {
@@ -39,7 +39,7 @@ public class Tilaus {
     }
 
     public int getPaivaId() {
-        return paivaId;
+        return this.paivaId;
     }
 
     public void setPaivaId(int paivaId) {
@@ -47,7 +47,7 @@ public class Tilaus {
     }
 
     public Asiakas getAsiakas() {
-        return asiakas;
+        return this.asiakas;
     }
 
     public void setAsiakas(Asiakas asiakas) {

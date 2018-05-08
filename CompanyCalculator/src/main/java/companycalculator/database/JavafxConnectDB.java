@@ -1,6 +1,6 @@
 package companycalculator.database;
 
-import companycalculator.advancelogic.TilausToiminnallisuus;
+import companycalculator.advancelogic.Tilaustoiminnallisuus;
 import companycalculator.dao.AsiakasDao;
 import companycalculator.dao.PaivaDao;
 import companycalculator.dao.TilausDao;
@@ -15,7 +15,7 @@ import java.util.Properties;
 public class JavafxConnectDB {
     
     private static Database database;
-    private static TilausToiminnallisuus tt;
+    private static Tilaustoiminnallisuus tt;
     
     private JavafxConnectDB() {
         
@@ -52,7 +52,7 @@ public class JavafxConnectDB {
         return new TilausDao(db, a, te, p);
     }
     
-    public static TilausToiminnallisuus getTT() {
+    public static Tilaustoiminnallisuus getTT() {
         if (tt != null) {
             return tt;
         } else {
@@ -61,7 +61,7 @@ public class JavafxConnectDB {
             TuoteDao te = new TuoteDao(db);
             PaivaDao p  = new PaivaDao(db);
             TilausDao ti = new TilausDao(db, a, te, p);
-            return new TilausToiminnallisuus(db, a, te, p, ti);
+            return new Tilaustoiminnallisuus(db, a, te, p, ti);
         }
     }
 }

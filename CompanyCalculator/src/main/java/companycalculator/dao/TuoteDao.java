@@ -55,80 +55,80 @@ public class TuoteDao implements Dao<Tuote, Integer> {
      */
     @Override
     public List<Tuote> findAll() {
-        List<Tuote> tuotteet = new ArrayList<>();
+        List<Tuote> products = new ArrayList<>();
 
         try (Connection conn = database.getConnection()) {
             ResultSet result = conn.prepareStatement("SELECT * FROM tuote").executeQuery();
 
             while (result.next()) {
-                tuotteet.add(new Tuote(result.getInt("id"), result.getString("tuotekoodi"), result.getString("nimi"), result.getDouble("hinta"), result.getDouble("alv")));
+                products.add(new Tuote(result.getInt("id"), result.getString("tuotekoodi"), result.getString("nimi"), result.getDouble("hinta"), result.getDouble("alv")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(TuoteDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return tuotteet;
+        return products;
     }
 
     /**
      * Metodi Muokkaa tuote id:tä vastaavaa tietuetta tuote-taulussa Tuote olion antamien tietojen avulla.
      *
-     * @param   paivitys   Käyttäjän tai ohjelman antamien tietojen avulla luotu Tuote olio.
+     * @param   update   Käyttäjän tai ohjelman antamien tietojen avulla luotu Tuote olio.
      *
      * @see     TuoteDao#findByTuotekoodi(String)
      *
      * @return Palauttaa saadun olion tai null, jos jo olemassa tuotekoodi jossakin tietueessa.
      */
     @Override
-    public Tuote update(Tuote paivitys) {
-        Tuote onko = findByTuotekoodi(paivitys.getTuotekoodi());
+    public Tuote update(Tuote update) {
+        Tuote onko = findByTuotekoodi(update.getTuotekoodi());
         if (onko != null) {
             return null;
         }
 
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("UPDATE tuote SET tuotekoodi = ?, nimi = ?, hinta = ?, alv = ? WHERE id = ?");
-            stmt.setString(1, paivitys.getTuotekoodi());
-            stmt.setString(2, paivitys.getNimi());
-            stmt.setDouble(3, paivitys.getHinta());
-            stmt.setDouble(4, paivitys.getAlv());
-            stmt.setInt(5, paivitys.getId());
+            stmt.setString(1, update.getTuotekoodi());
+            stmt.setString(2, update.getNimi());
+            stmt.setDouble(3, update.getHinta());
+            stmt.setDouble(4, update.getAlv());
+            stmt.setInt(5, update.getId());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(TuoteDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return paivitys;
+        return update;
     }
 
     /**
      * Metodi luo tuote-tauluun uuden tietueen saadun Tuote olion avulla.
      *
-     * @param   uusi   Käyttäjän tai ohjelman antamien tietojen avulla luotu Tuote olio.
+     * @param   created   Käyttäjän tai ohjelman antamien tietojen avulla luotu Tuote olio.
      *
      * @see     TuoteDao#findByTuotekoodi(String)
      *
      * @return Luotu tieto Tuote oliona tai null.
      */
     @Override
-    public Tuote save(Tuote uusi) {
-        Tuote onko = findByTuotekoodi(uusi.getTuotekoodi());
+    public Tuote save(Tuote created) {
+        Tuote onko = findByTuotekoodi(created.getTuotekoodi());
         if (onko != null) {
             return null;
         }
 
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO tuote(tuotekoodi, nimi, hinta, alv) VALUES(?, ?, ?, ?)");
-            stmt.setString(1, uusi.getTuotekoodi());
-            stmt.setString(2, uusi.getNimi());
-            stmt.setDouble(3, uusi.getHinta());
-            stmt.setDouble(4, uusi.getAlv());
+            stmt.setString(1, created.getTuotekoodi());
+            stmt.setString(2, created.getNimi());
+            stmt.setDouble(3, created.getHinta());
+            stmt.setDouble(4, created.getAlv());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(TuoteDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return findByTuotekoodi(uusi.getTuotekoodi());
+        return findByTuotekoodi(created.getTuotekoodi());
     }
 
     /**

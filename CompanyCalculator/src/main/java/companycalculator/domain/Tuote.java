@@ -16,11 +16,11 @@ public class Tuote {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public String getTuotekoodi() {
-        return tuotekoodi;
+        return this.tuotekoodi;
     }
 
     public void setTuotekoodi(String tuotekoodi) {
@@ -28,7 +28,7 @@ public class Tuote {
     }
 
     public String getNimi() {
-        return nimi;
+        return this.nimi;
     }
 
     public void setNimi(String nimi) {
@@ -36,7 +36,7 @@ public class Tuote {
     }
 
     public double getHinta() {
-        return hinta;
+        return this.hinta;
     }
 
     public void setHinta(double hinta) {
@@ -44,7 +44,7 @@ public class Tuote {
     }
 
     public double getAlv() {
-        return alv;
+        return this.alv;
     }
 
     public void setAlv(double alv) {

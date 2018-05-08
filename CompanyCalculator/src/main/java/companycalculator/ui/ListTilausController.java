@@ -1,7 +1,7 @@
 package companycalculator.ui;
 
 import companycalculator.Tilauspalvelu;
-import companycalculator.advancelogic.TilausToiminnallisuus;
+import companycalculator.advancelogic.Tilaustoiminnallisuus;
 import companycalculator.dao.TilausDao;
 import companycalculator.database.JavafxConnectDB;
 import companycalculator.domain.Tilaus;
@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ListTilausController implements Initializable {
-    private TilausToiminnallisuus tilausToiminnallisuus;
+    private Tilaustoiminnallisuus tilausToiminnallisuus;
     private Tilauspalvelu application;
     private TilausDao tilausdao;
 

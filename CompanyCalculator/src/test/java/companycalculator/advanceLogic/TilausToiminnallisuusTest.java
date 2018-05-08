@@ -1,6 +1,6 @@
 package companycalculator.advanceLogic;
 
-import companycalculator.advancelogic.TilausToiminnallisuus;
+import companycalculator.advancelogic.Tilaustoiminnallisuus;
 import companycalculator.dao.AsiakasDao;
 import companycalculator.dao.PaivaDao;
 import companycalculator.dao.TilausDao;
@@ -33,7 +33,7 @@ public class TilausToiminnallisuusTest {
     private PaivaDao paivadao;
     private TuoteDao tuotedao;
     private AsiakasDao asiakasdao;
-    private TilausToiminnallisuus tilauspalvelu;
+    private Tilaustoiminnallisuus tilauspalvelu;
     private File tempFile;
 
     @Rule
@@ -63,7 +63,7 @@ public class TilausToiminnallisuusTest {
         this.asiakasdao = new AsiakasDao(database);
         this.tilausdao = new TilausDao(database, asiakasdao, tuotedao, paivadao);
 
-        this.tilauspalvelu = new TilausToiminnallisuus(database, asiakasdao, tuotedao, paivadao, tilausdao);
+        this.tilauspalvelu = new Tilaustoiminnallisuus(database, asiakasdao, tuotedao, paivadao, tilausdao);
 
         try {
             database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS tuote(id INTEGER PRIMARY KEY, tuotekoodi varchar(255), nimi varchar(255), " +

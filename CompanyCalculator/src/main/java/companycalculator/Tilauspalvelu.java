@@ -152,7 +152,7 @@ public class Tilauspalvelu extends Application {
     public void start(Stage primaryStage) {
         this.stage = primaryStage;
 
-        this.stage.setTitle("Tilausten k√§sittely palvelu");
+        this.stage.setTitle("Tilausten k‰sittely palvelu");
         setMainScene();
         this.stage.show();
     }

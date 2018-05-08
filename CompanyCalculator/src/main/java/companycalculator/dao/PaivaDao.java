@@ -54,43 +54,43 @@ public class PaivaDao implements Dao<Paiva, Integer> {
      */
     @Override
     public List<Paiva> findAll() {
-        List<Paiva> paivat = new ArrayList<>();
+        List<Paiva> dates = new ArrayList<>();
 
         try (Connection conn = database.getConnection()) {
             ResultSet result = conn.prepareStatement("SELECT * FROM paiva").executeQuery();
 
             while (result.next()) {
-                paivat.add(new Paiva(result.getInt("id"), result.getString("paiva"), result.getInt("asiakas_id")));
+                dates.add(new Paiva(result.getInt("id"), result.getString("paiva"), result.getInt("asiakas_id")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PaivaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return paivat;
+        return dates;
     }
 
     /**
      * Metodi luo tietokantaan uuden paiva tietueen parametrinä saadun olion tarjoamien tietojen avulla.
      *
-     * @param   uusi   Käyttäjän tai ohjelman antamien tietojen perusteella luotu Paiva olio.
+     * @param   created   Käyttäjän tai ohjelman antamien tietojen perusteella luotu Paiva olio.
      *
      * @see     PaivaDao#findAll()
      *
      * @return Null tai tietokantaan lisätty Paiva olio.
      */
     @Override
-    public Paiva save(Paiva uusi) {
+    public Paiva save(Paiva created) {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO paiva(paiva, asiakas_id) VALUES(?, ?)");
-            stmt.setString(1, uusi.getPaiva());
-            stmt.setInt(2, uusi.getAsiakasId());
+            stmt.setString(1, created.getPaiva());
+            stmt.setInt(2, created.getAsiakasId());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(PaivaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        List<Paiva> paivat = findAll();
-        return paivat.get(paivat.size() - 1);
+        List<Paiva> dates = findAll();
+        return dates.get(dates.size() - 1);
     }
 
     @Override

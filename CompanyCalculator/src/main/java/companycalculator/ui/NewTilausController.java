@@ -1,7 +1,7 @@
 package companycalculator.ui;
 
 import companycalculator.Tilauspalvelu;
-import companycalculator.advancelogic.TilausToiminnallisuus;
+import companycalculator.advancelogic.Tilaustoiminnallisuus;
 import companycalculator.database.JavafxConnectDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class NewTilausController implements Initializable {
-    private TilausToiminnallisuus tilausToiminnallisuus;
+    private Tilaustoiminnallisuus tilausToiminnallisuus;
     private Tilauspalvelu application;
 
     @FXML
@@ -50,17 +50,17 @@ public class NewTilausController implements Initializable {
         boolean c = date.isEmpty();
         
         if (a) {
-            this.errorTunnus.setText("lisï¿½ï¿½ uniikki y-tunnus.");
+            this.errorTunnus.setText("lisää uniikki y-tunnus.");
         } else {
             this.errorTunnus.setText("");
         }
         if (b) {
-            this.errorStatus.setText("lisï¿½ï¿½  status (tarjous vai tilaus).");
+            this.errorStatus.setText("lisää  status (tarjous vai tilaus).");
         } else {
             this.errorStatus.setText("");
         }
         if (c) {
-            this.errorPaiva.setText("lisï¿½ï¿½ paivamaara.");
+            this.errorPaiva.setText("lisää päivämaarä.");
         } else {
             this.errorPaiva.setText("");
         }
@@ -70,7 +70,7 @@ public class NewTilausController implements Initializable {
             this.paiva.setText("");
             this.status.setText("");
             
-            TilausToiminnallisuus.prepareAdd(tunnus, stats, date);
+            Tilaustoiminnallisuus.prepareAdd(tunnus, stats, date);
             this.application.setTuoteLoopScene();
         }
     }

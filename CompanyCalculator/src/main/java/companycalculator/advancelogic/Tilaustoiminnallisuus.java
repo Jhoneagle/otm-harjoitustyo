@@ -22,14 +22,14 @@ import java.util.logging.Logger;
  * Varsinainen sovellus logiikka tietokannan hallintaan tilausten osalta.
  * Pääasiallisesti tilausDaon ja käyttöliittymän yhdistäminen.
  */
-public class TilausToiminnallisuus {
+public class Tilaustoiminnallisuus {
     private Database database;
     private AsiakasDao asiakasDao;
     private TuoteDao tuoteDao;
     private PaivaDao paivaDao;
     private TilausDao tilausDao;
 
-    public TilausToiminnallisuus(Database database, AsiakasDao asiakasDao, TuoteDao tuoteDao, PaivaDao paivaDao, TilausDao tilausDao) {
+    public Tilaustoiminnallisuus(Database database, AsiakasDao asiakasDao, TuoteDao tuoteDao, PaivaDao paivaDao, TilausDao tilausDao) {
         this.database = database;
         this.asiakasDao = asiakasDao;
         this.tuoteDao = tuoteDao;
@@ -42,44 +42,44 @@ public class TilausToiminnallisuus {
      * Tämän jälkeen selvittää tilauksen id:n luomalla tilauksen ja lisää tilaustuote liitostauluun kaikki tietueet, jotka tarvitaan.
      * Käyttäen tilauksen id:tä ja tuoteDaosta saatujen Tuote olioiden id:en avulla.
      *
-     * @param   uusi    Uusi Tilaus olio, joka sisältää alussa vain tilauksen statuksen, joka on saatu käyttäjältä.
-     * @param   tuotekoodit     Lista tuotekoodeja, jotka on saatu käyttäjältä.
+     * @param   created    Uusi Tilaus olio, joka sisältää alussa vain tilauksen statuksen, joka on saatu käyttäjältä.
+     * @param   productNumbers     Lista tuotekoodeja, jotka on saatu käyttäjältä.
      * @param   ytunnus     Käyttäjän tai ohjelman antama asiakaan y-tunnus.
-     * @param   paiva   Käyttäjän tai ohjelman antama päivämäärä.
-     * @param   tuotemaara  Tuotekoodeja vastaavien tuotteiden lukumäärä tilauksessa.
+     * @param   date   Käyttäjän tai ohjelman antama päivämäärä.
+     * @param   productAmounts  Tuotekoodeja vastaavien tuotteiden lukumäärä tilauksessa.
      *
      * @see     AsiakasDao#findByYtunnus(String)
      * @see     PaivaDao#save(Paiva)
      * @see     TilausDao#save(Tilaus)
      * @see     TuoteDao#findByTuotekoodi(String)
      */
-    public void addTilaus(Tilaus uusi, List<String> tuotekoodit, String ytunnus, String paiva, List<Integer> tuotemaara) {
-        Asiakas asiakas = asiakasDao.findByYtunnus(ytunnus);
-        Paiva paivamaara = new Paiva(0, paiva, asiakas.getId());
+    public void addTilaus(Tilaus created, List<String> productNumbers, String ytunnus, String date, List<Integer> productAmounts) {
+        Asiakas customer = this.asiakasDao.findByYtunnus(ytunnus);
+        Paiva calenter = new Paiva(0, date, customer.getId());
 
-        paivamaara = paivaDao.save(paivamaara);
-        uusi.setPaivaId(paivamaara.getId());
+        calenter = this.paivaDao.save(calenter);
+        created.setPaivaId(calenter.getId());
 
-        int tilausId = tilausDao.save(uusi).getId();
+        int orderId = this.tilausDao.save(created).getId();
 
-        for (int i = 0; i < tuotekoodit.size(); i++) {
-            Tuote temp = tuoteDao.findByTuotekoodi(tuotekoodit.get(i));
+        for (int i = 0; i < productNumbers.size(); i++) {
+            Tuote temp = this.tuoteDao.findByTuotekoodi(productNumbers.get(i));
 
-            try (Connection conn = database.getConnection()) {
+            try (Connection conn = this.database.getConnection()) {
                 PreparedStatement stmt = conn.prepareStatement("INSERT INTO tilaustuote(tuotemaara, tilaus_id, tuote_id) VALUES(?, ?, ?)");
-                stmt.setInt(1, tuotemaara.get(i));
-                stmt.setInt(2, tilausId);
+                stmt.setInt(1, productAmounts.get(i));
+                stmt.setInt(2, orderId);
                 stmt.setInt(3, temp.getId());
 
                 stmt.executeUpdate();
             } catch (SQLException ex) {
-                Logger.getLogger(TilausToiminnallisuus.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Tilaustoiminnallisuus.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
     /**
-     * Hakee kaikki tilaukset ja sitten luo niiden avulla listan merkkijonoja.
+     * Hakee kaikki orders ja sitten luo niiden avulla listan merkkijonoja.
      *
      * @see     TilausDao#findAll()
      * @see     PaivaDao#findOne(Integer)
@@ -87,11 +87,11 @@ public class TilausToiminnallisuus {
      * @return lista merkkijonoja, joissa on tietoja tilauksista.
      */
     public List<String> listTilaukset() {
-        List<Tilaus> tilaukset = tilausDao.findAll();
+        List<Tilaus> orders = this.tilausDao.findAll();
         List<String> string = new ArrayList<>();
 
-        for (int i = 0; i < tilaukset.size(); i++) {
-            Tilaus temp = tilaukset.get(i);
+        for (int i = 0; i < orders.size(); i++) {
+            Tilaus temp = orders.get(i);
 
             if (temp.getStatus().contains("toimitettu")) {
                 continue;
@@ -99,38 +99,38 @@ public class TilausToiminnallisuus {
 
             Paiva paivamaara = this.paivaDao.findOne(temp.getPaivaId());
 
-            String lisattava = new StringBuilder().append(temp.getId()).append(". ")
+            String added = new StringBuilder().append(temp.getId()).append(". ")
                     .append("yritys: ").append(temp.getAsiakas().getYritysNimi()).append(", paiva: ")
                     .append(paivamaara.getPaiva()).append(", status: ").append(temp.getStatus()).toString();
             
-            string.add(lisattava);
+            string.add(added);
         }
 
         return string;
     }
 
     /**
-     * Päivittää tilauksen statuksen ja paivamaaran, jos parametrina saatu "paiva" ei ole tyhjä.
+     * Päivittää tilauksen statuksen ja paivamaaran, jos parametrina saatu "day" ei ole tyhjä.
      *
      * @param   id    Käyttäjältä saatu tilauksen id.
-     * @param   status  käyttäjältä saatu uusi tilauksen status.
-     * @param   paiva   käyttäjältä saatu mahdollinen uusi paiva muuten tyhjä.
+     * @param   state  käyttäjältä saatu uusi tilauksen state.
+     * @param   day   käyttäjältä saatu mahdollinen uusi day muuten tyhjä.
      *
      * @see     TilausDao#findOne(Integer)
      * @see     PaivaDao#save(Paiva)
      * @see     TilausDao#update(Tilaus)
      */
-    public void editTilausta(int id, String status, String paiva) {
-        Tilaus tilaus = this.tilausDao.findOne(id);
-        tilaus.setStatus(status);
+    public void editTilausta(int id, String state, String day) {
+        Tilaus order = this.tilausDao.findOne(id);
+        order.setStatus(state);
 
-        Paiva date = new Paiva(tilaus.getPaivaId(), paiva, tilaus.getAsiakas().getId());
-        if (!paiva.isEmpty()) {
+        Paiva date = new Paiva(order.getPaivaId(), day, order.getAsiakas().getId());
+        if (!day.isEmpty()) {
             date = paivaDao.save(date);
         }
 
-        tilaus.setPaivaId(date.getId());
-        this.tilausDao.update(tilaus);
+        order.setPaivaId(date.getId());
+        this.tilausDao.update(order);
     }
 
     /**
@@ -142,11 +142,11 @@ public class TilausToiminnallisuus {
      * @see     TilausDao#delete(Integer)
      */
     public void removeTilaus(int id) {
-        List<Tuote> tuotteet = this.tilausDao.findOne(id).getTuotteet();
+        List<Tuote> orders = this.tilausDao.findOne(id).getTuotteet();
         this.tilausDao.delete(id);
 
-        for (int i = 0; i < tuotteet.size(); i++) {
-            Tuote temp = tuotteet.get(i);
+        for (int i = 0; i < orders.size(); i++) {
+            Tuote temp = orders.get(i);
 
             try (Connection conn = database.getConnection()) {
                 PreparedStatement stmt = conn.prepareStatement(
@@ -155,22 +155,40 @@ public class TilausToiminnallisuus {
                 stmt.setInt(2, temp.getId());
                 stmt.execute();
             } catch (SQLException ex) {
-                Logger.getLogger(TilausToiminnallisuus.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Tilaustoiminnallisuus.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
     
-    public void executeAdd(List<String> tuotteet, List<Integer> tuotemaarat) {
-        addTilaus(preTilaus, tuotteet, preYtunnus, prePaiva, tuotemaarat);
+    /**
+     * k�ytt�� valmistelussa saatuja arvoja ja parametrina saatuja vikoja tietoja ja suorittaa nill� varsinaisen lis�yksen.
+     * 
+     * @param   products    tuoteiden tuotekoodit.
+     * @param   amounts     tuoteiden lukumaara tilauksessa.
+     * 
+     * @see     Tilaustoiminnallisuus#prepareAdd(java.lang.String, java.lang.String, java.lang.String) 
+     */
+    
+    public void executeAdd(List<String> products, List<Integer> amounts) {
+        addTilaus(preOrder, products, preYtunnus, preDay, amounts);
     }
     
-    private static Tilaus preTilaus;
+    private static Tilaus preOrder;
     private static String preYtunnus;
-    private static String prePaiva;
+    private static String preDay;
     
-    public static void prepareAdd(String ytunnus, String status, String paiva) {
-        preTilaus = new Tilaus(0, status, new ArrayList<>(), 0, new Asiakas());
+    /**
+     * Metodi valmistelee tilauksen lis�yksen. 
+     * Mik� mahdollistaa tilauksen lis�yksen on k�ytt�liittym� millainen tahansa.
+     * 
+     * @param   ytunnus asiakaan y tunnus
+     * @param   state   tilauksen status
+     * @param   day     paivamaara
+     */
+    
+    public static void prepareAdd(String ytunnus, String state, String day) {
+        preOrder = new Tilaus(0, state, new ArrayList<>(), 0, new Asiakas());
         preYtunnus = ytunnus;
-        prePaiva = paiva;
+        preDay = day;
     }
 }

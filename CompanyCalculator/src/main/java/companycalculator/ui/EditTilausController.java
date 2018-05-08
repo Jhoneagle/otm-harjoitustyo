@@ -1,7 +1,7 @@
 package companycalculator.ui;
 
 import companycalculator.Tilauspalvelu;
-import companycalculator.advancelogic.TilausToiminnallisuus;
+import companycalculator.advancelogic.Tilaustoiminnallisuus;
 import companycalculator.dao.PaivaDao;
 import companycalculator.database.JavafxConnectDB;
 import companycalculator.domain.Paiva;
@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EditTilausController implements Initializable {
-    private TilausToiminnallisuus tilausToiminnallisuus;
+    private Tilaustoiminnallisuus tilausToiminnallisuus;
     private PaivaDao paivadao;
     private Tilauspalvelu application;
     

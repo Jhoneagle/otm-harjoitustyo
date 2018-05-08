@@ -1,6 +1,6 @@
 package companycalculator.ui;
 
-import companycalculator.advancelogic.TilausToiminnallisuus;
+import companycalculator.advancelogic.Tilaustoiminnallisuus;
 import companycalculator.dao.AsiakasDao;
 import companycalculator.dao.TuoteDao;
 import companycalculator.domain.Asiakas;
@@ -21,9 +21,9 @@ public class Tekstikayttoliittyma {
     private Scanner lukija;
     private TuoteDao tuotedao;
     private AsiakasDao asiakasdao;
-    private TilausToiminnallisuus tilauspalvelu;
+    private Tilaustoiminnallisuus tilauspalvelu;
 
-    public Tekstikayttoliittyma(Scanner lukija, TuoteDao tuotedao, AsiakasDao asiakasdao, TilausToiminnallisuus tilauspalvelu) {
+    public Tekstikayttoliittyma(Scanner lukija, TuoteDao tuotedao, AsiakasDao asiakasdao, Tilaustoiminnallisuus tilauspalvelu) {
         this.lukija = lukija;
         this.tuotedao = tuotedao;
         this.asiakasdao = asiakasdao;

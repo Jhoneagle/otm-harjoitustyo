@@ -55,13 +55,13 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
      */
     @Override
     public List<Asiakas> findAll() {
-        List<Asiakas> asiakaat = new ArrayList<>();
+        List<Asiakas> customers = new ArrayList<>();
 
         try (Connection conn = database.getConnection()) {
             ResultSet result = conn.prepareStatement("SELECT * FROM asiakas").executeQuery();
 
             while (result.next()) {
-                asiakaat.add(new Asiakas(result.getInt("id"), result.getString("yritys_nimi"), result.getString("ytunnus"),
+                customers.add(new Asiakas(result.getInt("id"), result.getString("yritys_nimi"), result.getString("ytunnus"),
                         result.getString("nimi"), result.getString("sahkoposti"), result.getString("puhelinnumero"),
                         result.getString("osoite"), result.getString("postinumero"), result.getString("postitoimipaikka")));
             }
@@ -69,38 +69,38 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
             Logger.getLogger(AsiakasDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return asiakaat;
+        return customers;
     }
 
     /**
      * Metodi Lisää tietokantaan uuden asiakas tietueen Asiakas olion antamien arvojen perusteella.
      *
-     * @param   uusi   Käyttäjän söyteistä luotu Asiakas olio.
+     * @param   created   Käyttäjän söyteistä luotu Asiakas olio.
      *
      * @see     AsiakasDao#findByYtunnus(String)
      *
      * @return Palauttaa lisätyn asiakaan hakemalla sen tietokannasta y-tunnuksen avulla.
      */
     @Override
-    public Asiakas save(Asiakas uusi) {
+    public Asiakas save(Asiakas created) {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO asiakas(yritys_nimi, ytunnus, nimi, sahkoposti, puhelinnumero, osoite, " +
                     "postinumero, postitoimipaikka) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, uusi.getYritysNimi());
-            stmt.setString(2, uusi.getyTunnus());
-            stmt.setString(3, uusi.getNimi());
-            stmt.setString(4, uusi.getSahkoposti());
-            stmt.setString(5, uusi.getPuhelinnumero());
-            stmt.setString(6, uusi.getOsoite());
-            stmt.setString(7, uusi.getPostinumero());
-            stmt.setString(8, uusi.getPostitoimipaikka());
+            stmt.setString(1, created.getYritysNimi());
+            stmt.setString(2, created.getyTunnus());
+            stmt.setString(3, created.getNimi());
+            stmt.setString(4, created.getSahkoposti());
+            stmt.setString(5, created.getPuhelinnumero());
+            stmt.setString(6, created.getOsoite());
+            stmt.setString(7, created.getPostinumero());
+            stmt.setString(8, created.getPostitoimipaikka());
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AsiakasDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return findByYtunnus(uusi.getyTunnus());
+        return findByYtunnus(created.getyTunnus());
     }
 
     @Override

@@ -1,7 +1,7 @@
 package companycalculator.ui;
 
 import companycalculator.Tilauspalvelu;
-import companycalculator.advancelogic.TilausToiminnallisuus;
+import companycalculator.advancelogic.Tilaustoiminnallisuus;
 import companycalculator.dao.TuoteDao;
 import companycalculator.database.JavafxConnectDB;
 import companycalculator.domain.Tuote;
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class TuoteLoopController implements Initializable {
-    private TilausToiminnallisuus tilausToiminnallisuus;
+    private Tilaustoiminnallisuus tilausToiminnallisuus;
     private Tilauspalvelu application;
     private TuoteDao tuotedao;
 

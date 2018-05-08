@@ -71,7 +71,7 @@ public class NewAsiakasController implements Initializable {
         boolean h = postitoimipaikka.isEmpty();
         
         if (a || b || c || d || e || f || g || h) {
-            this.errorMessage.setText("Tï¿½ydennï¿½ tyhjï¿½t kentï¿½t.");
+            this.errorMessage.setText("Täydennä tyhjät kentät.");
         } else {
             this.errorMessage.setText("");
             this.nimi.setText("");
