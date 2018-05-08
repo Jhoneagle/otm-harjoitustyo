@@ -99,8 +99,8 @@ public class TilausToiminnallisuus {
 
             Paiva paivamaara = this.paivaDao.findOne(temp.getPaivaId());
 
-            String lisattava = new StringBuilder().append("yritys: ").append(temp.getAsiakas().getYritysNimi())
-                    .append(", yrityksen y-tunnus: ").append(temp.getAsiakas().getyTunnus()).append(", paiva: ")
+            String lisattava = new StringBuilder().append(temp.getId()).append(". ")
+                    .append("yritys: ").append(temp.getAsiakas().getYritysNimi()).append(", paiva: ")
                     .append(paivamaara.getPaiva()).append(", status: ").append(temp.getStatus()).toString();
             
             string.add(lisattava);
@@ -160,30 +160,17 @@ public class TilausToiminnallisuus {
         }
     }
     
-    /**
-     * Hakee ytunnuksen ja statuksen perusteella tilausta.
-     *
-     * @param   ytunnus  K√§ytt√§j√§lt√§ saatu asiakaan y-tunnus.
-     * @param   status   K‰ytt‰j‰lt‰ saatu tilauksen status.
-     * 
-     * @see     TilausDao#findAll()
-     * @see     AsiakasDao#findByYtunnus(java.lang.String) 
-     *
-     * @return lˆydetyn tilauksen tai null.
-     */
-    public Tilaus findTilaus(String ytunnus, String status) {
-        Asiakas asiakas = this.asiakasDao.findByYtunnus(ytunnus);
-        List<Tilaus> tilaukset = this.tilausDao.findAll();
-        
-        for (int i = 0; i < tilaukset.size(); i++) {
-            Tilaus temp = tilaukset.get(i);
-            if (temp.getAsiakas().getId() == asiakas.getId()) {
-                if (temp.getStatus().contains(status)) {
-                    return temp;
-                }
-            }
-        }
-        
-        return null;
+    public void executeAdd(List<String> tuotteet, List<Integer> tuotemaarat) {
+        addTilaus(preTilaus, tuotteet, preYtunnus, prePaiva, tuotemaarat);
+    }
+    
+    private static Tilaus preTilaus;
+    private static String preYtunnus;
+    private static String prePaiva;
+    
+    public static void prepareAdd(String ytunnus, String status, String paiva) {
+        preTilaus = new Tilaus(0, status, new ArrayList<>(), 0, new Asiakas());
+        preYtunnus = ytunnus;
+        prePaiva = paiva;
     }
 }

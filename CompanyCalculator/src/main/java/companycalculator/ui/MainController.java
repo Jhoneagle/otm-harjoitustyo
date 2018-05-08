@@ -1,22 +1,16 @@
 package companycalculator.ui;
 
 import companycalculator.Tilauspalvelu;
-import companycalculator.database.DbLauncher;
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
-    private DbLauncher dbLauncher;
     private Tilauspalvelu application;
-
-    public void setDbLauncher(DbLauncher todoService) {
-        this.dbLauncher = todoService;
-    }
 
     public void setApplication(Tilauspalvelu application) {
         this.application = application;

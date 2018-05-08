@@ -39,7 +39,8 @@
                 <version>0.8.0</version>
 		    <configuration>
                 <excludes>
-                    <exclude>companycalculator/kayttoliittyma/*</exclude>
+                    <exclude>companycalculator/ui/*</exclude>
+                    <exclude>companycalculator/database/JavafxConnectDB.class</exclude>
                     <exclude>companycalculator/Tilauspalvelu.class</exclude>
                 </excludes>
 	        </configuration> 

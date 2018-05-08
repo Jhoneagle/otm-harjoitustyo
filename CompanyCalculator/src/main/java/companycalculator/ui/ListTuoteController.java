@@ -1,22 +1,22 @@
 package companycalculator.ui;
 
 import companycalculator.Tilauspalvelu;
-import companycalculator.database.DbLauncher;
+import companycalculator.dao.TuoteDao;
+import companycalculator.database.Database;
+import companycalculator.database.JavafxConnectDB;
 import companycalculator.domain.Tuote;
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
-
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 public class ListTuoteController implements Initializable {
-    private DbLauncher dbLauncher;
+    private TuoteDao tuotedao;
     private Tilauspalvelu application;
 
     @FXML private ListView<Tuote> listView;
@@ -24,14 +24,14 @@ public class ListTuoteController implements Initializable {
     @FXML
     private Button removeButton;
     
-    public void setDbLauncher(DbLauncher todoService) {
-        this.dbLauncher = todoService;
-    }
-
     public void setApplication(Tilauspalvelu application) {
         this.application = application;
     }
 
+    private void refresh() {
+        this.listView.getItems().setAll(this.tuotedao.findAll());
+    }
+    
     @FXML
     private void handleNavigation(ActionEvent event) {
         Node node = (Node) event.getSource();
@@ -64,20 +64,28 @@ public class ListTuoteController implements Initializable {
     }
 
     @FXML
-    void remove(ActionEvent event) {
+    public void remove(ActionEvent event) {
         Tuote tuote = this.listView.getSelectionModel().getSelectedItem();
         if (tuote != null) {
-            this.dbLauncher.getTuotedao().delete(tuote.getId());
+            this.tuotedao.delete(tuote.getId());
+            refresh();
         }
     }
     
     @FXML
-    void edit(ActionEvent event) {
-        
+    public void edit(ActionEvent event) {
+        Tuote tuote = this.listView.getSelectionModel().getSelectedItem();
+        if (tuote != null) {
+            EditTuoteController.setEdit(tuote);
+            
+            this.application.seteditTuoteScene();
+        }
     }
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.listView.getItems().addAll(this.dbLauncher.getTuotedao().findAll());
+        Database db = JavafxConnectDB.getDB();
+        this.tuotedao = new TuoteDao(db);
+        this.listView.getItems().setAll(this.tuotedao.findAll());
     }
 }

@@ -1,8 +1,8 @@
 package companycalculator.ui;
 
+import companycalculator.advancelogic.TilausToiminnallisuus;
 import companycalculator.dao.AsiakasDao;
 import companycalculator.dao.TuoteDao;
-import companycalculator.advancelogic.TilausToiminnallisuus;
 import companycalculator.domain.Asiakas;
 import companycalculator.domain.Tilaus;
 import companycalculator.domain.Tuote;

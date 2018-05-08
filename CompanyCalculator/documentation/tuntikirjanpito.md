@@ -19,4 +19,7 @@
 3.5 | 3 | fxml lisää
 4.5 | 5 | controllerien luonti ja navigointi
 5.5 | 4 | ui controls
-yht | 48 |
+6.5 | 1 | viimeistelyä
+7.5 | 6 | loppu tarkistukset
+8.5 | ? | dokumentaatio loppuun
+yht | 55+? |

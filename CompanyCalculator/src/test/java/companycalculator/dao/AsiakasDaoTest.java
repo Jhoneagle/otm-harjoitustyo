@@ -10,9 +10,12 @@ import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static org.junit.Assert.assertTrue;
 
@@ -24,7 +27,7 @@ public class AsiakasDaoTest {
     public TemporaryFolder tempFolder = new TemporaryFolder();
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Properties properties = new Properties();
         String databaseAddress = "";
         
@@ -33,20 +36,28 @@ public class AsiakasDaoTest {
             tempFile = tempFolder.newFile(properties.getProperty("testDatabaseFile"));
             databaseAddress = "jdbc:sqlite:"+tempFile.getAbsolutePath();
         } catch(Exception e) {
-            tempFile = tempFolder.newFile("test.db");
+            try {
+                tempFile = tempFolder.newFile("test.db");
+            } catch (IOException ex) {
+                Logger.getLogger(AsiakasDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
             databaseAddress = "jdbc:sqlite:"+tempFile.getAbsolutePath();
         }
         
         Database database = new Database(databaseAddress);
 
-        database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS asiakas(id INTEGER PRIMARY KEY, yritys_nimi varchar(50), ytunnus varchar(50), " +
-                "nimi varchar(50), sahkoposti varchar(50), puhelinnumero varchar(50), osoite varchar(50), postinumero varchar(50), postitoimipaikka varchar(50))").execute();
+        try {
+            database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS asiakas(id INTEGER PRIMARY KEY, yritys_nimi varchar(50), ytunnus varchar(50), " +
+                    "nimi varchar(50), sahkoposti varchar(50), puhelinnumero varchar(50), osoite varchar(50), postinumero varchar(50), postitoimipaikka varchar(50))").execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(AsiakasDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         dao = new AsiakasDao(database);
     }
 
     @Test
-    public void save() throws SQLException {
+    public void save() {
         Asiakas testi = new Asiakas(0, "ask", "w123", "q", "q", "123", "q", "123", "q");
         Asiakas uusi = dao.save(testi);
 
@@ -61,7 +72,7 @@ public class AsiakasDaoTest {
     }
 
     @Test
-    public void findOne() throws SQLException {
+    public void findOne() {
         Asiakas testi = new Asiakas(0, "ask", "w123", "q", "q", "123", "q", "123", "q");
         dao.save(testi);
 
@@ -78,7 +89,7 @@ public class AsiakasDaoTest {
     }
 
     @Test
-    public void findAll() throws SQLException {
+    public void findAll() {
         Asiakas testi = new Asiakas(0, "ask", "w123", "q", "q", "123", "q", "123", "q");
         Asiakas testi2 = new Asiakas(0, "ask", "w123", "q", "q", "123", "q", "123", "q");
         dao.save(testi);

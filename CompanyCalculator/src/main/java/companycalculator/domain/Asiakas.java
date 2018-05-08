@@ -94,8 +94,8 @@ public class Asiakas {
 
     @Override
     public String toString() {
-        return "Nimi: " + this.nimi + ", sähköposti: " + this.sahkoposti + ", puhelinnumero: " + this.puhelinnumero + "yritys: "
+        return "Nimi: " + this.nimi + ", sÃ¤hkÃ¤posti: " + this.sahkoposti + ", puhelinnumero: " + this.puhelinnumero + ", yritys: "
                 + this.yritysNimi + ", yrityksen y-tunnus: " + this.yTunnus + ", osoite: " + this.osoite + ", postinumero: "
-                + this.postinumero + ", postitoimipaikka: "+ this.postitoimipaikka;
+                + this.postinumero + ", postitoimipaikka: " + this.postitoimipaikka;
     }
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="companycalculator.ui.EditTuoteController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="410.0" prefWidth="722.0" VBox.vgrow="ALWAYS">
+      <children>
+        <Label alignment="CENTER" layoutX="296.0" layoutY="34.0" style="&#10;" text="Tuote" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+          <font>
+            <Font size="18.0" />
+          </font>
+        </Label>
+            <Button layoutX="342.0" layoutY="275.0" mnemonicParsing="false" onAction="#submit" text="Päivitä" />
+            <TextField fx:id="nimi" layoutX="262.0" layoutY="113.0" />
+            <Label layoutX="180.0" layoutY="117.0" text="Tuotteen nimi: " />
+            <Label layoutX="193.0" layoutY="158.0" text="Tuotekoodi: " />
+            <TextField fx:id="koodi" layoutX="262.0" layoutY="154.0" />
+            <Label layoutX="225.0" layoutY="198.0" text="Hinta: " />
+            <TextField fx:id="hinta" layoutX="262.0" layoutY="194.0" />
+            <Label layoutX="234.0" layoutY="235.0" text="Alv: " />
+            <TextField fx:id="alv" layoutX="262.0" layoutY="231.0" />
+            <Button layoutX="262.0" layoutY="275.0" mnemonicParsing="false" onAction="#backHandle" text="Takaisin" />
+            <TextArea layoutX="453.0" layoutY="112.0" prefHeight="109.0" prefWidth="111.0" text="         Ohje&#10;&#10;Jätä tyhjäksi ne &#10;joita ei muokata." />
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

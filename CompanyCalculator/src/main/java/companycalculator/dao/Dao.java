@@ -1,6 +1,5 @@
 package companycalculator.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -8,14 +7,14 @@ import java.util.List;
  */
 public interface Dao<T, K> {
 
-    T findOne(K key) throws SQLException;
+    T findOne(K key);
 
-    List<T> findAll() throws SQLException;
+    List<T> findAll();
 
-    T save(T object) throws SQLException;
+    T save(T object);
 
-    T update(T object) throws SQLException;
+    T update(T object);
 
-    void delete(K key) throws SQLException;
+    void delete(K key);
 }
 

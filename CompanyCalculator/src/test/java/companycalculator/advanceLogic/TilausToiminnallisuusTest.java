@@ -1,10 +1,10 @@
 package companycalculator.advanceLogic;
 
+import companycalculator.advancelogic.TilausToiminnallisuus;
 import companycalculator.dao.AsiakasDao;
 import companycalculator.dao.PaivaDao;
 import companycalculator.dao.TilausDao;
 import companycalculator.dao.TuoteDao;
-import companycalculator.advancelogic.TilausToiminnallisuus;
 import companycalculator.database.Database;
 import companycalculator.domain.Asiakas;
 import companycalculator.domain.Tilaus;
@@ -17,10 +17,13 @@ import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static org.junit.Assert.assertTrue;
 
@@ -37,7 +40,7 @@ public class TilausToiminnallisuusTest {
     public TemporaryFolder tempFolder = new TemporaryFolder();
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Properties properties = new Properties();
         String databaseAddress = "";
         
@@ -46,7 +49,11 @@ public class TilausToiminnallisuusTest {
             tempFile = tempFolder.newFile(properties.getProperty("testDatabaseFile"));
             databaseAddress = "jdbc:sqlite:"+tempFile.getAbsolutePath();
         } catch(Exception e) {
-            tempFile = tempFolder.newFile("test.db");
+            try {
+                tempFile = tempFolder.newFile("test.db");
+            } catch (IOException ex) {
+                Logger.getLogger(TilausToiminnallisuusTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
             databaseAddress = "jdbc:sqlite:"+tempFile.getAbsolutePath();
         }
         
@@ -58,21 +65,25 @@ public class TilausToiminnallisuusTest {
 
         this.tilauspalvelu = new TilausToiminnallisuus(database, asiakasdao, tuotedao, paivadao, tilausdao);
 
-        database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS tuote(id INTEGER PRIMARY KEY, tuotekoodi varchar(255), nimi varchar(255), " +
-                "hinta REAL, alv REAL)").execute();
-        database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS paiva(id INTEGER PRIMARY KEY, paiva varchar(144), asiakas_id INTEGER, " +
-                "FOREIGN KEY (asiakas_id) REFERENCES asiakas(id))").execute();
-        database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS tilaus(id INTEGER PRIMARY KEY, status varchar(30), paiva_id INTEGER, " +
-                "FOREIGN KEY (paiva_id) REFERENCES paiva(id))").execute();
-        database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS tilaustuote(tuotemaara INTEGER, tilaus_id INTEGER, tuote_id INTEGER, " +
-                "FOREIGN KEY (tilaus_id) REFERENCES tilaus(id), FOREIGN KEY (tuote_id) REFERENCES tuote(id))").execute();
-        database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS asiakas(id INTEGER PRIMARY KEY, yritys_nimi varchar(144), ytunnus varchar(144), " +
-                "nimi varchar(144), sahkoposti varchar(144), puhelinnumero varchar(144), osoite varchar(144), postinumero varchar(144), postitoimipaikka varchar(144))").execute();
-
+        try {
+            database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS tuote(id INTEGER PRIMARY KEY, tuotekoodi varchar(255), nimi varchar(255), " +
+                    "hinta REAL, alv REAL)").execute();
+            database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS paiva(id INTEGER PRIMARY KEY, paiva varchar(144), asiakas_id INTEGER, " +
+                    "FOREIGN KEY (asiakas_id) REFERENCES asiakas(id))").execute();
+            database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS tilaus(id INTEGER PRIMARY KEY, status varchar(30), paiva_id INTEGER, " +
+                    "FOREIGN KEY (paiva_id) REFERENCES paiva(id))").execute();
+            database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS tilaustuote(tuotemaara INTEGER, tilaus_id INTEGER, tuote_id INTEGER, " +
+                    "FOREIGN KEY (tilaus_id) REFERENCES tilaus(id), FOREIGN KEY (tuote_id) REFERENCES tuote(id))").execute();
+            database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS asiakas(id INTEGER PRIMARY KEY, yritys_nimi varchar(144), ytunnus varchar(144), " +
+                    "nimi varchar(144), sahkoposti varchar(144), puhelinnumero varchar(144), osoite varchar(144), postinumero varchar(144), postitoimipaikka varchar(144))").execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(TilausToiminnallisuusTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     @Test
-    public void TilausLisays() throws SQLException {
+    public void TilausLisays() {
         Asiakas a =  new Asiakas(0, "ask", "test", "q", "q", "123", "q", "123", "q");
         Tilaus uusi = new Tilaus(0, "tarjous", new ArrayList<>(), 1, a);
 
@@ -97,13 +108,13 @@ public class TilausToiminnallisuusTest {
         tilauspalvelu.addTilaus(uusi, tuotekoodit, ytunnus, paiva, tuotemaara);
 
         List<String> tilaukset = tilauspalvelu.listTilaukset();
-        String malli = "yritys: "+a.getYritysNimi()+", paiva: "+paiva+", status: "+uusi.getStatus();
+        String malli = "1. yritys: "+a.getYritysNimi()+", paiva: "+paiva+", status: "+uusi.getStatus();
 
         assertTrue(malli.contains(tilaukset.get(0)));
     }
 
     @Test
-    public void TilausListaus() throws SQLException {
+    public void TilausListaus() {
         Asiakas a =  new Asiakas(0, "ask", "test", "q", "q", "123", "q", "123", "q");
         Tilaus uusi = new Tilaus(0, "tarjous", new ArrayList<>(), 1, a);
 
@@ -152,8 +163,8 @@ public class TilausToiminnallisuusTest {
         //tarkastus
 
         List<String> tilaukset = tilauspalvelu.listTilaukset();
-        String malli = "yritys: "+a.getYritysNimi()+", paiva: "+paiva+", status: "+uusi.getStatus();
-        String malli2 = "yritys: "+a2.getYritysNimi()+", paiva: "+paiva2+", status: "+uusi2.getStatus();
+        String malli = "1. yritys: "+a.getYritysNimi()+", paiva: "+paiva+", status: "+uusi.getStatus();
+        String malli2 = "2. yritys: "+a2.getYritysNimi()+", paiva: "+paiva2+", status: "+uusi2.getStatus();
 
         assertTrue(malli.contains(tilaukset.get(0)));
         assertTrue(malli2.contains(tilaukset.get(1)));
