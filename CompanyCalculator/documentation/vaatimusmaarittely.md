@@ -2,7 +2,7 @@
 
 ## Sovelluksen tarkoitus
 
-Sovelluksen on tarkoitus helpottaa sekä nopeuttaa pitopalvelun ja myöhemmin muidenkin yritysten tuoteiden listaamista, tilausten ja tarjousten luomista ja laskutuksen tekoa. Tehden siitä vaivattomampaa ja laskutuksesta sekä hinnoittelusta luotettavaa. 
+Sovelluksen on tarkoitus helpottaa sekä nopeuttaa pitopalvelun ja myöhemmin muidenkin yritysten tilausten ja tarjousten hallintointia, luomista ja laskutuksen tekoa. Tehden siitä vaivattomampaa sekä sulavampaa ja laskutuksesta sekä hinnoittelusta luotettavampaa. 
 
 ## Käyttäjät
 
@@ -10,9 +10,10 @@ käyttäjiä on alussa vain normaalit käyttäjät. Tulevaisuudessa sovelluksen laajen
 
 ## Perusversion tarjoama toiminnallisuus
 
-* käyttäjä voi lisätä tuotteita, muokata niitä
+* käyttäjä voi lisätä tuotteita ja muokata niitä
 * käyttäjä voi myös poistaa tuotteita valikoimasta
-* luoda tarjouksia ja muuttaa ne tilauksiksi
+* käyttäjä voi lisätä asiakaita ja listata ne
+* luoda tarjouksia ja tilauksiksi ja muuttaa niiden statusta sekä päivää
 * merkitä tilauksen toimitetuksi, jolloin poistuu kesken eräisistä
 
 ## Jatkokehitysideoita

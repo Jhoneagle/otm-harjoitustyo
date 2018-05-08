@@ -36,10 +36,6 @@ public class Asiakas {
         return this.yritysNimi;
     }
 
-    public void setYritysNimi(String yritysNimi) {
-        this.yritysNimi = yritysNimi;
-    }
-
     public String getyTunnus() {
         return this.yTunnus;
     }
@@ -56,40 +52,20 @@ public class Asiakas {
         return this.sahkoposti;
     }
 
-    public void setSahkoposti(String sahkoposti) {
-        this.sahkoposti = sahkoposti;
-    }
-
     public String getPuhelinnumero() {
         return this.puhelinnumero;
-    }
-
-    public void setPuhelinnumero(String puhelinnumero) {
-        this.puhelinnumero = puhelinnumero;
     }
 
     public String getOsoite() {
         return this.osoite;
     }
 
-    public void setOsoite(String osoite) {
-        this.osoite = osoite;
-    }
-
     public String getPostinumero() {
         return this.postinumero;
     }
 
-    public void setPostinumero(String postinumero) {
-        this.postinumero = postinumero;
-    }
-
     public String getPostitoimipaikka() {
         return this.postitoimipaikka;
-    }
-
-    public void setPostitoimipaikka(String postitoimipaikka) {
-        this.postitoimipaikka = postitoimipaikka;
     }
 
     @Override

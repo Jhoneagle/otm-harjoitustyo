@@ -2,6 +2,7 @@ package companycalculator.ui;
 
 import companycalculator.Tilauspalvelu;
 import companycalculator.advancelogic.Tilaustoiminnallisuus;
+import companycalculator.dao.AsiakasDao;
 import companycalculator.database.JavafxConnectDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import java.util.ResourceBundle;
 
 public class NewTilausController implements Initializable {
     private Tilaustoiminnallisuus tilausToiminnallisuus;
+    private AsiakasDao asiakasdao;
     private Tilauspalvelu application;
 
     @FXML
@@ -49,18 +51,18 @@ public class NewTilausController implements Initializable {
         boolean b = stats.isEmpty();
         boolean c = date.isEmpty();
         
-        if (a) {
-            this.errorTunnus.setText("lis‰‰ uniikki y-tunnus.");
+        if (a || (this.asiakasdao.findByYtunnus(tunnus) == null)) {
+            this.errorTunnus.setText("lis√§√§ uniikki y-tunnus.");
         } else {
             this.errorTunnus.setText("");
         }
         if (b) {
-            this.errorStatus.setText("lis‰‰  status (tarjous vai tilaus).");
+            this.errorStatus.setText("lis√§√§  status (tarjous vai tilaus).");
         } else {
             this.errorStatus.setText("");
         }
         if (c) {
-            this.errorPaiva.setText("lis‰‰ p‰iv‰maar‰.");
+            this.errorPaiva.setText("lis√§√§ p√§iv√§maar√§.");
         } else {
             this.errorPaiva.setText("");
         }
@@ -109,6 +111,7 @@ public class NewTilausController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.tilausToiminnallisuus = JavafxConnectDB.getTT();
+        this.asiakasdao = new AsiakasDao(JavafxConnectDB.getDB());
     }
 }
 

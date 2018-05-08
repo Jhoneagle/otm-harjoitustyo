@@ -34,10 +34,6 @@ public class Tilaus {
         return this.tuotteet;
     }
 
-    public void setTuotteet(List<Tuote> tuotteet) {
-        this.tuotteet = tuotteet;
-    }
-
     public int getPaivaId() {
         return this.paivaId;
     }

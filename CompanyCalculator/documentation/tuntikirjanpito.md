@@ -21,5 +21,6 @@
 5.5 | 4 | ui controls
 6.5 | 1 | viimeistelyä
 7.5 | 6 | loppu tarkistukset
-8.5 | ? | dokumentaatio loppuun
-yht | 55+? |
+8.5 | 3 | dokumentaatio
+8.5 | 3 | dokumentaatio loppuun
+yht | 61 |

@@ -31,7 +31,10 @@ public class Database {
             return null;
         }
     }
-    
+
+    /**
+     * alustaa kaikki tietokanta taulut tarvittaessa olettaen, että saa yhteyden tietokantaan.
+     */
     private void initializeSqlTables() {
         try {
             getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS tuote(id INTEGER PRIMARY KEY, tuotekoodi varchar(255), nimi varchar(255), " +

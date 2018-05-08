@@ -26,8 +26,4 @@ public class Paiva {
     public int getAsiakasId() {
         return this.asiakasId;
     }
-
-    public void setAsiakasId(int asiakasId) {
-        this.asiakasId = asiakasId;
-    }
 }

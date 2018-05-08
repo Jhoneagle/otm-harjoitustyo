@@ -22,9 +22,6 @@ public class ListTilausController implements Initializable {
 
     @FXML private ListView<String> listView;
     
-    @FXML
-    private Button removeButton;
-
     public void refresh() {
         this.listView.getItems().setAll(this.tilausToiminnallisuus.listTilaukset());
     }
@@ -33,6 +30,11 @@ public class ListTilausController implements Initializable {
         this.application = application;
     }
 
+    @FXML
+    private void relist(ActionEvent event) {
+        refresh();
+    }
+    
     @FXML
     private void handleNavigation(ActionEvent event) {
         Node node = (Node) event.getSource();

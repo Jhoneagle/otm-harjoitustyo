@@ -75,7 +75,7 @@ public class NewTuoteController implements Initializable {
         } else {
             this.errorNimi.setText("");
         }
-        if (b) {
+        if (b || (this.tuoteDao.findByTuotekoodi(tuoteenKoodi) != null)) {
             this.errorKoodi.setText("Anna tuotteelle uniikki tuotekoodi.");
         } else {
             this.errorKoodi.setText("");

@@ -72,7 +72,9 @@ public class NewAsiakasController implements Initializable {
         
         if (a || b || c || d || e || f || g || h) {
             this.errorMessage.setText("Täydennä tyhjät kentät.");
-        } else {
+        } else if (this.asiakasdao.findByYtunnus(yTunnus) != null) {
+            this.errorMessage.setText("y-tunnus on jo varattu.");
+        }else {
             this.errorMessage.setText("");
             this.nimi.setText("");
             this.osoite.setText("");

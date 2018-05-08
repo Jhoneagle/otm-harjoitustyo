@@ -21,15 +21,17 @@ public class ListTuoteController implements Initializable {
 
     @FXML private ListView<Tuote> listView;
     
-    @FXML
-    private Button removeButton;
-    
     public void setApplication(Tilauspalvelu application) {
         this.application = application;
     }
 
     private void refresh() {
         this.listView.getItems().setAll(this.tuotedao.findAll());
+    }
+    
+    @FXML
+    private void relist(ActionEvent event) {
+        refresh();
     }
     
     @FXML

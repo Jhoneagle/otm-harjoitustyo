@@ -103,11 +103,17 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
         return findByYtunnus(created.getyTunnus());
     }
 
+    /**
+     * not supported
+     */
     @Override
     public Asiakas update(Asiakas object) {
         return null;
     }
 
+    /**
+     * not supported
+     */
     @Override
     public void delete(Integer key) {
 

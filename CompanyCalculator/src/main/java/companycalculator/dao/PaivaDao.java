@@ -93,11 +93,17 @@ public class PaivaDao implements Dao<Paiva, Integer> {
         return dates.get(dates.size() - 1);
     }
 
+    /**
+     * not supported
+     */
     @Override
     public Paiva update(Paiva object) {
         return null;
     }
 
+    /**
+     * not supported
+     */
     @Override
     public void delete(Integer key) {
 

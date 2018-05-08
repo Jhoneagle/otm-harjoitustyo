@@ -24,10 +24,15 @@ public class ListAsiakasController implements Initializable {
         this.application = application;
     }
     
-    public void refersh() {
+    public void refresh() {
         this.listView.getItems().setAll(this.asiakasdao.findAll());
     }
 
+    @FXML
+    private void relist(ActionEvent event) {
+        refresh();
+    }
+    
     @FXML
     private void handleNavigation(ActionEvent event) {
         Node node = (Node) event.getSource();

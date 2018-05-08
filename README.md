@@ -6,7 +6,9 @@
 
 [Työaikakirjanpito](https://github.com/Jhoneagle/otm-harjoitustyo/blob/master/CompanyCalculator/documentation/tuntikirjanpito.md) 
 
-[Käytto-ohje](https://github.com/Jhoneagle/otm-harjoitustyo/blob/master/CompanyCalculator/documentation/kayttoohje.md)
+[Käyttöohje](https://github.com/Jhoneagle/otm-harjoitustyo/blob/master/CompanyCalculator/documentation/kayttoohje.md)
+
+[Testausdokumentti](https://github.com/Jhoneagle/otm-harjoitustyo/blob/master/CompanyCalculator/documentation/testausdokumentti.md)
 
 [Vaatimusmäärittely](https://github.com/Jhoneagle/otm-harjoitustyo/blob/master/CompanyCalculator/documentation/vaatimusmaarittely.md) 
 
@@ -15,6 +17,8 @@
 [Viikko 5](https://github.com/Jhoneagle/otm-harjoitustyo/releases/tag/v1.0)
 
 [Viikko 7](https://github.com/Jhoneagle/otm-harjoitustyo/releases/tag/v1.1)
+
+[Loppupalautus](https://github.com/Jhoneagle/otm-harjoitustyo/releases/tag/v1.11)
 
 ## Komentorivitoiminnot
 

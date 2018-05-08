@@ -55,7 +55,7 @@ public class EditTuoteController implements Initializable {
             tuoteenNimi = editTuote.getNimi();
             a = false;
         }
-        if (b) {
+        if (b || (this.tuotedao.findByTuotekoodi(tuoteenKoodi) != null)) {
             tuoteenKoodi = editTuote.getTuotekoodi();
             b = false;
         }

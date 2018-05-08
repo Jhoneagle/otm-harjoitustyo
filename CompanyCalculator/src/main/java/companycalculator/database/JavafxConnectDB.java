@@ -10,7 +10,7 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 /**
- * Javafx k�ytt�liitym�n tueksi tietokannan k�ytt��n otossa.
+ * Javafx käyttäliitymän tueksi tietokannan käyttöön otossa.
  */
 public class JavafxConnectDB {
     
@@ -43,7 +43,12 @@ public class JavafxConnectDB {
         
         return database;
     }
-    
+
+    /**
+     * antaa intansin TilausDaosta.
+     *
+     * @return  TilausDao olio.
+     */
     public static TilausDao getTD() {
         Database db = getDB();
         AsiakasDao a = new AsiakasDao(db);
@@ -51,7 +56,12 @@ public class JavafxConnectDB {
         PaivaDao p  = new PaivaDao(db);
         return new TilausDao(db, a, te, p);
     }
-    
+
+    /**
+     * antaa intansin tilaustoiminnallisuudesta.
+     *
+     * @return  Tilaustoiminnallisuus olio.
+     */
     public static Tilaustoiminnallisuus getTT() {
         if (tt != null) {
             return tt;

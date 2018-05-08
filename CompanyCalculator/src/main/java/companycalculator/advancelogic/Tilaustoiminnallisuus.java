@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 
 /**
  * Varsinainen sovellus logiikka tietokannan hallintaan tilausten osalta.
- * P√§√§asiallisesti tilausDaon ja k√§ytt√∂liittym√§n yhdist√§minen.
+ * P‰‰asiallisesti tilausDaon ja k‰yttˆliittym‰n yhdist‰minen.
  */
 public class Tilaustoiminnallisuus {
     private Database database;
@@ -38,15 +38,15 @@ public class Tilaustoiminnallisuus {
     }
 
     /**
-     * Ensiksi etsii asiakaan ja luo p√§iv√§m√§√§r√§n k√§ytt√§en niille tarkoitettuja Daoita hy√∂dyksi.
-     * T√§m√§n j√§lkeen selvitt√§√§ tilauksen id:n luomalla tilauksen ja lis√§√§ tilaustuote liitostauluun kaikki tietueet, jotka tarvitaan.
-     * K√§ytt√§en tilauksen id:t√§ ja tuoteDaosta saatujen Tuote olioiden id:en avulla.
+     * Ensiksi etsii asiakaan ja luo p‰iv‰m‰‰r‰n k‰ytt‰en niille tarkoitettuja Daoita hyˆdyksi.
+     * T‰m‰n j‰lkeen selvitt‰‰ tilauksen id:n luomalla tilauksen ja lis‰‰ tilaustuote liitostauluun kaikki tietueet, jotka tarvitaan.
+     * K‰ytt‰en tilauksen id:t‰ ja tuoteDaosta saatujen Tuote olioiden id:en avulla.
      *
-     * @param   created    Uusi Tilaus olio, joka sis√§lt√§√§ alussa vain tilauksen statuksen, joka on saatu k√§ytt√§j√§lt√§.
-     * @param   productNumbers     Lista tuotekoodeja, jotka on saatu k√§ytt√§j√§lt√§.
-     * @param   ytunnus     K√§ytt√§j√§n tai ohjelman antama asiakaan y-tunnus.
-     * @param   date   K√§ytt√§j√§n tai ohjelman antama p√§iv√§m√§√§r√§.
-     * @param   productAmounts  Tuotekoodeja vastaavien tuotteiden lukum√§√§r√§ tilauksessa.
+     * @param   created    Uusi Tilaus olio, joka sis‰lt‰‰ alussa vain tilauksen statuksen, joka on saatu k‰ytt‰j‰lt‰.
+     * @param   productNumbers     Lista tuotekoodeja, jotka on saatu k‰ytt‰j‰lt‰.
+     * @param   ytunnus     K‰ytt‰j‰n tai ohjelman antama asiakaan y-tunnus.
+     * @param   date   K‰ytt‰j‰n tai ohjelman antama p‰iv‰m‰‰r‰.
+     * @param   productAmounts  Tuotekoodeja vastaavien tuotteiden lukum‰‰r‰ tilauksessa.
      *
      * @see     AsiakasDao#findByYtunnus(String)
      * @see     PaivaDao#save(Paiva)
@@ -102,7 +102,7 @@ public class Tilaustoiminnallisuus {
             String added = new StringBuilder().append(temp.getId()).append(". ")
                     .append("yritys: ").append(temp.getAsiakas().getYritysNimi()).append(", paiva: ")
                     .append(paivamaara.getPaiva()).append(", status: ").append(temp.getStatus()).toString();
-            
+
             string.add(added);
         }
 
@@ -110,11 +110,11 @@ public class Tilaustoiminnallisuus {
     }
 
     /**
-     * P√§ivitt√§√§ tilauksen statuksen ja paivamaaran, jos parametrina saatu "day" ei ole tyhj√§.
+     * P‰ivitt‰‰ tilauksen statuksen ja p‰iv‰m‰‰r‰n, jos parametrina saatu "day" ei ole tyhj‰.
      *
-     * @param   id    K√§ytt√§j√§lt√§ saatu tilauksen id.
-     * @param   state  k√§ytt√§j√§lt√§ saatu uusi tilauksen state.
-     * @param   day   k√§ytt√§j√§lt√§ saatu mahdollinen uusi day muuten tyhj√§.
+     * @param   id    K‰ytt‰j‰lt‰ saatu tilauksen id.
+     * @param   state  k‰ytt‰j‰lt‰ saatu uusi tilauksen state.
+     * @param   day   k‰ytt‰j‰lt‰ saatu mahdollinen uusi day muuten tyhj‰.
      *
      * @see     TilausDao#findOne(Integer)
      * @see     PaivaDao#save(Paiva)
@@ -134,9 +134,9 @@ public class Tilaustoiminnallisuus {
     }
 
     /**
-     *  poistaa ensiksi tilauksen ja sen j√§lkeen kaikki liitostaulusta l√∂ytyv√§t tietueet, jotka liittyv√§t siihen.
+     *  poistaa ensiksi tilauksen ja sen j‰lkeen kaikki liitostaulusta lˆytyv‰t tietueet, jotka liittyv‰t siihen.
      *
-     * @param   id  K√§ytt√§j√§lt√§ saatu tilauksen id.
+     * @param   id  K‰ytt‰j‰lt‰ saatu tilauksen id.
      *
      * @see     TilausDao#findOne(Integer)
      * @see     TilausDao#delete(Integer)
@@ -159,33 +159,33 @@ public class Tilaustoiminnallisuus {
             }
         }
     }
-    
+
     /**
      * k‰ytt‰‰ valmistelussa saatuja arvoja ja parametrina saatuja vikoja tietoja ja suorittaa nill‰ varsinaisen lis‰yksen.
-     * 
+     *
      * @param   products    tuoteiden tuotekoodit.
      * @param   amounts     tuoteiden lukumaara tilauksessa.
-     * 
-     * @see     Tilaustoiminnallisuus#prepareAdd(java.lang.String, java.lang.String, java.lang.String) 
+     *
+     * @see     Tilaustoiminnallisuus#prepareAdd(java.lang.String, java.lang.String, java.lang.String)
      */
-    
+
     public void executeAdd(List<String> products, List<Integer> amounts) {
         addTilaus(preOrder, products, preYtunnus, preDay, amounts);
     }
-    
+
     private static Tilaus preOrder;
     private static String preYtunnus;
     private static String preDay;
-    
+
     /**
-     * Metodi valmistelee tilauksen lis‰yksen. 
-     * Mik‰ mahdollistaa tilauksen lis‰yksen on k‰yttˆliittym‰ millainen tahansa.
-     * 
+     * Metodi valmistelee tilauksen lis‰yksen.
+     * Mik‰ mahdollistaa tilauksen lis‰yksen on k‰ytt‰liittym‰ millainen tahansa.
+     *
      * @param   ytunnus asiakaan y tunnus
      * @param   state   tilauksen status
      * @param   day     paivamaara
      */
-    
+
     public static void prepareAdd(String ytunnus, String state, String day) {
         preOrder = new Tilaus(0, state, new ArrayList<>(), 0, new Asiakas());
         preYtunnus = ytunnus;
