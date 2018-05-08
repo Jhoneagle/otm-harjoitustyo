@@ -67,15 +67,15 @@ Mahdollisuus poistaa tilauksia ja muokata niitä. Listaus alustettava Buttonista
 
 ![tilaus muokkaus näkymä](kuvat/editTilausScene.jpg)
 
-Uusi arvo syötetttävä ja jätettävä tyhjäksi, jos ei halua muokata arvoa. Takaisin listauseen pääsee "takaisin" nappulalla.
+Uusi arvo syötetttävä ja jätettävä tyhjäksi, jos ei halua muokata arvoa. Takaisin listaukseen pääsee "takaisin" nappulalla.
 
 ### Tilaus lisäys
 
 ![tilaus lisäys näkymä osa 1](kuvat/newTilausScene.jpg)
 
-Validointi: asiakaan y-tunnus oltava olemassa ja muuten vaatimus vain, että jotain. eteenpäin napilla pääsee seuraavaan vaiheeseen.
+Validointi: asiakaan y-tunnus oltava olemassa ja muuten vaatimus vain, että jotain. Eteenpäin napilla pääsee seuraavaan vaiheeseen.
 
 ![tilaus lisäys näkymä osa 2](kuvat/newTilaus2Scene.jpg)
 
-Alhaalla olevalla nappulalla toteutetaan lisäys. Avattavasta valikosta voi valita tuotteen tuotevalikoimasta, jolloin tiedot tulevat alle. Tämän lisäksi, jos maara laatikossa on positiivinen luku, niin viereinen lisäys nappi lisää listaukseen tuoteen tuotekoodin ja lukumaaran mitä sitä valitaan. vlintoja voi poistaa "poista" napilla, kun ne on valittuja. 
+Alhaalla olevalla nappulalla toteutetaan lisäys. Avattavasta valikosta voi valita tuotteen tuotevalikoimasta, jolloin tiedot tulevat alle. Tämän lisäksi, jos maara laatikossa on positiivinen luku, niin viereinen lisäys nappi lisää listaukseen tuoteen tuotekoodin ja lukumaaran mitä sitä valitaan. Valintoja voi poistaa "poista" napilla, kun ne on valittuja. 
 
