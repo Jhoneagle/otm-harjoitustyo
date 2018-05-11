@@ -46,13 +46,6 @@ public class AsiakasDaoTest {
         
         Database database = new Database(databaseAddress);
 
-        try {
-            database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS asiakas(id INTEGER PRIMARY KEY, yritys_nimi varchar(50), ytunnus varchar(50), " +
-                    "nimi varchar(50), sahkoposti varchar(50), puhelinnumero varchar(50), osoite varchar(50), postinumero varchar(50), postitoimipaikka varchar(50))").execute();
-        } catch (SQLException ex) {
-            Logger.getLogger(AsiakasDaoTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         dao = new AsiakasDao(database);
     }
 

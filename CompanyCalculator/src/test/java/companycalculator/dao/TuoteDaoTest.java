@@ -43,13 +43,6 @@ public class TuoteDaoTest {
         
         Database database = new Database(databaseAddress);
 
-        try {
-            database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS tuote(id INTEGER PRIMARY KEY, tuotekoodi varchar(255), nimi varchar(255), " +
-                    "hinta REAL, alv REAL)").execute();
-        } catch (SQLException ex) {
-            Logger.getLogger(TuoteDaoTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         dao = new TuoteDao(database);
     }
 

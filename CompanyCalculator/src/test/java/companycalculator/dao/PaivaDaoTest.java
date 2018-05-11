@@ -40,14 +40,11 @@ public class PaivaDaoTest {
         
         Database database = new Database(databaseAddress);
 
-        database.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS paiva(id INTEGER PRIMARY KEY, paiva DATE, asiakas_id INTEGER, " +
-                "FOREIGN KEY (asiakas_id) REFERENCES asiakas(id))").execute();
-
         dao = new PaivaDao(database);
     }
 
     @Test
-    public void save() throws SQLException {
+    public void save() {
         Paiva testi = new Paiva(0, "2014-02-10", 1);
         Paiva save = dao.save(testi);
 
@@ -56,7 +53,7 @@ public class PaivaDaoTest {
     }
 
     @Test
-    public void findOne() throws SQLException {
+    public void findOne() {
         Paiva testi = new Paiva(0, "2014-02-10", 1);
         dao.save(testi);
 
@@ -67,7 +64,7 @@ public class PaivaDaoTest {
     }
 
     @Test
-    public void findAll() throws SQLException {
+    public void findAll() {
         Paiva testi = new Paiva(0, "2014-02-10", 1);
         Paiva testi2 = new Paiva(0, "2014-06-10", 2);
         dao.save(testi);

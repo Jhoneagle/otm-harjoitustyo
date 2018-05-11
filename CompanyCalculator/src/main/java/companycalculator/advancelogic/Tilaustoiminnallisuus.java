@@ -61,7 +61,7 @@ public class Tilaustoiminnallisuus {
         created.setPaivaId(calenter.getId());
 
         int orderId = this.tilausDao.save(created).getId();
-
+        
         for (int i = 0; i < productNumbers.size(); i++) {
             Tuote temp = this.tuoteDao.findByTuotekoodi(productNumbers.get(i));
 
