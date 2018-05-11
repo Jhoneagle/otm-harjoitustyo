@@ -1,6 +1,6 @@
 ﻿# Testausdokumentti
 
-Sovelluksen järjesstelmätaso on testattu manuaalisesti joten käyttöliittymälle ei ole automaatti testejä. Jotkin testit kuitenkin jossain määrin simuloivat mitä oikea käyttäjä voi tehdä-
+Sovelluksen järjesstelmätaso on testattu manuaalisesti joten käyttöliittymälle ei ole automaatti testejä. Jotkin testit kuitenkin jossain määrin simuloivat mitä oikea käyttäjä voi tehdä.
 
 Sen sijaan yksikkö- ja integraatiotestausta varten on luotu automaattisia Junittia käyttäviä testejä. 
 
