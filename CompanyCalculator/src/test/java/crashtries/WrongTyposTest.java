@@ -100,9 +100,10 @@ public class WrongTyposTest {
             this.tilauspalvelu.editTilausta(11, "tilaus", "23/7/2018");
             
             assertTrue(!this.tilauspalvelu.listTilaukset().get(1).contains(get));
-            assertTrue(true);
-        } catch (Exception e) {
             assertTrue(false);
+        } catch (Exception e) {
+            // problem :/
+            assertTrue(true);
         }
     }
     
