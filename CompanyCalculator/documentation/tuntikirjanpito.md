@@ -24,4 +24,6 @@
 8.5 | 3 | dokumentaatio
 8.5 | 3 | dokumentaatio loppuun
 9.5 | 2 | lähellä loppua
-yht | 63 |
+11.5 | 4 | lisää testejä
+11.5 | 1 | dokumentaatiota loppuun
+yht | 68 |
