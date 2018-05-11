@@ -10,13 +10,13 @@ Sovelluksen kaikilla Dao-luokilla on tehty yksikkö testit, jotka testaavat tila
 
 Integraatio testeissä ja laajemman sovelluslogiikan testeissä kuitenkin käydään myös tilanteita läpi, jossa käyttäjä antaa virheellisiä tietoja. Muutenkin kyseiset testit käyvät läpi kuinka hyvin eri luokat pystyvät toimimaan keskenään ongelmitta. 
 
-### testauskattavuus
+### Testauskattavuus
 
 Käyttöliittymäkerrosta lukuunottamatta sovelluksen testauksen rivikattavuus on 77% ja haarautumakattavuus 84%.
 
 ![testikattavuus](kuvat/kattavuus.jpg)
 
-Suurin osa testaamattomista haarautumista ovat vakavia virhetilanteita kuten nullpointer ja sql kyselyn epäonnistuminen esimerkiksi teitokantataulun puuttuessa. Sen sijaan rivi kattavuudeen poissa oloa selittää tietyjen toimintojen, jota todellisuudessa käytetään puuttumista testeistä. Johtuen niiden tarpeettomuudesta testien näkökulmasta. Monet virhetilanteista mitä testit eivät käsittele on kuitenkin estetty käyttöliittymän validointien kautta.
+Suurin osa testaamattomista haarautumista ovat vakavia virhetilanteita kuten nullpointer ja sql kyselyn epäonnistuminen esimerkiksi teitokantataulun puuttuessa. Sen sijaan rivi kattavuudeen vajaavuutta selittää tietyjen toimintojen, jota todellisuudessa käytetään, puuttuminen testeistä. Johtuen niiden tarpeettomuudesta testien näkökannalta. Monet virhetilanteista mitä testit eivät käsittele on kuitenkin estetty käyttöliittymän validointien kautta.
 
 ## Järjestelmätestaus
 
