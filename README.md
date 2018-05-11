@@ -1,6 +1,6 @@
 ﻿# OTM-harjoitustyö
 
-## dokumentaatio
+## Dokumentaatio
 
 [Arkkitehtuurikuvaus](https://github.com/Jhoneagle/otm-harjoitustyo/blob/master/CompanyCalculator/documentation/arkkitehtuuri.md) 
 
@@ -46,7 +46,7 @@ Komento
 mvn package
 ```
 
-generoi hakemistoon _target_ suoritettavan jar-tiedoston _Company-calculator-1.0-SNAPSHOT.jar_
+Generoi hakemistoon _target_ suoritettavan jar-tiedoston _Company-calculator-1.0-SNAPSHOT.jar_
 
 ### JavaDoc
 
@@ -60,7 +60,7 @@ JavaDocia voi tarkastella avaamalla selaimella tiedosto _target/site/apidocs/ind
 
 ### Checkstyle
 
-Tiedostoon [checkstyle.xml](https://github.com/Jhoneagle/otm-harjoitustyo/blob/master/CompanyCalculator/checkstyle.xml) määrittelemät tarkistukset suoritetaan komennolla
+Tiedoston [checkstyle.xml](https://github.com/Jhoneagle/otm-harjoitustyo/blob/master/CompanyCalculator/checkstyle.xml) määrittelemät tarkistukset suoritetaan komennolla
 
 ```
  mvn jxr:jxr checkstyle:checkstyle
